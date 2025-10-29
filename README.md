@@ -30,3 +30,5 @@ By @NocYnTwoC（Occasionally Online）
 ---
 
 ##### DOCUMENT NOT COMPLETE :TODO
+
+##### THANK FOR `https://cshuds.com/`、`OpenHUD`、`drweissbrot/cs-hud`
