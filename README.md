@@ -9,7 +9,9 @@ By @NocYnTwoC（Occasionally Online）[Discord](https://discord.gg/6YFnDQPNNn)
 1. Download the corresponding version from the [Releases](https://) page
 2. Run `voidhud-1.0.0-setup.exe`
 3. Follow the prompts to complete the installation
-4. Launch **Void HUD Manager**
+4. Launch **Void HUD Manager**  
+
+OBS / vMix browser: `http://localhost:5031/overlay`
 
 ## Development Guide
 
