@@ -1,10 +1,10 @@
 # Void HUD Manager
 
-By @NocYnTwoC（Occasionally Online）
+By @NocYnTwoC（Occasionally Online）[Discord](https://discord.gg/6YFnDQPNNn)
 
 ## Installation
 
-[YouTube](https://)
+[YouTube Preview](https://www.youtube.com/watch?v=xQnzowV-1Mc)
 
 1. Download the corresponding version from the [Releases](https://) page
 2. Run `voidhud-1.0.0-setup.exe`
