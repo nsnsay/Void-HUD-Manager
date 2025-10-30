@@ -253,8 +253,8 @@ export class DatabaseService {
   readonly teams = new CollectionStore<BaseEntity>(teamsFile)
   readonly players = new CollectionStore<BaseEntity>(playersFile)
   readonly settings = new KeyValueStore<KeyValueData>(settingsFile, {
-    seriesName_first: 'VoidHUD',
-    seriesName_second: 'VoidHUD',
+    seriesName_first: '你咋感觉好喃',
+    seriesName_second: '志得小人',
     seriesName_third: 'VoidHUD',
     overlayFocusedPlayer: true,
     overlaySidebars: true,
@@ -262,7 +262,7 @@ export class DatabaseService {
     overlayRadar: true,
     ctColor: '286bfa',
     tColor: 'f52559',
-    borderRadius: '8px'
+    borderRadius: '0px'
   })
   readonly additional = new KeyValueStore<KeyValueData>(additionalFile, {})
 }

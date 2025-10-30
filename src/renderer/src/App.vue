@@ -1,17 +1,55 @@
 <script setup lang="ts">
-import OverlayButton from './components/OverlayButton.vue';
 import WindowControls from './components/window-controls/window-controls.vue'
-import MultiWindow from './multiwindow.vue'
+import Pages from './pages.vue'
 import Toast from 'primevue/toast'
+import { onMounted } from 'vue'
+import { useToast } from 'primevue'
+import { useI18n } from 'vue-i18n'
+
+const toast = useToast()
+const { t } = useI18n({ useScope: 'global' })
+
+onMounted(() => {
+  // 订阅主进程的更新事件并提示 Toast
+  if (window.update) {
+    window.update.on((payload: any) => {
+      switch (payload?.type) {
+        case 'checking':
+          toast.add({ severity: 'info', summary: t('updater.title'), detail: t('updater.checking'), life: 3000 })
+          break
+        case 'available': {
+          const version = payload?.info?.version ?? ''
+          toast.add({ severity: 'warn', summary: t('updater.title'), detail: t('updater.available', { version }), life: 6000 })
+          break
+        }
+        case 'notAvailable':
+          toast.add({ severity: 'success', summary: t('updater.title'), detail: t('updater.notAvailable'), life: 3000 })
+          break
+        case 'downloading': {
+          const percent = Math.floor(payload?.progress?.percent ?? 0)
+          toast.add({ severity: 'info', summary: t('updater.title'), detail: t('updater.downloading', { percent }), life: 3000 })
+          break
+        }
+        case 'downloaded':
+          toast.add({ severity: 'success', summary: t('updater.title'), detail: t('updater.downloaded'), life: 5000 })
+          break
+        case 'error':
+          toast.add({ severity: 'error', summary: t('updater.title'), detail: t('updater.error'), life: 5000 })
+          break
+      }
+    })
+    // 应用加载后主动检查一次更新
+    window.update.check()
+  }
+})
 </script>
 
 <template>
   <Toast position="bottom-right" />
   <div class="VHApp">
     <WindowControls />
-    <MultiWindow />
+    <Pages />
   </div>
-  <OverlayButton />
 </template>
 
 <style lang="scss">

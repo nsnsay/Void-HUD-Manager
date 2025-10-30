@@ -13,6 +13,14 @@ const api = {
   autoPlaceGSI: () => ipcRenderer.invoke('gsi:auto-place')
 }
 
+// Updater APIs for renderer
+const update = {
+  check: () => ipcRenderer.invoke('updater:check'),
+  download: () => ipcRenderer.invoke('updater:download'),
+  quitAndInstall: () => ipcRenderer.invoke('updater:quitAndInstall'),
+  on: (cb: (payload: any) => void) => ipcRenderer.on('updater:status', (_evt, payload) => cb(payload))
+}
+
 // Database IPC wrappers with typed-like structure
 const db = {
   matchs: {
@@ -113,6 +121,7 @@ if (process.contextIsolated) {
     contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
     contextBridge.exposeInMainWorld('db', db)
+    contextBridge.exposeInMainWorld('update', update)
   } catch (error) {
     console.error(error)
   }
@@ -123,4 +132,6 @@ if (process.contextIsolated) {
   window.api = api
   // @ts-ignore (define in dts)
   window.db = db
+  // @ts-ignore (define in dts)
+  window.update = update
 }

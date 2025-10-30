@@ -1,10 +1,10 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
-import matchs from '../multi/matchs.vue'
-import players from '../multi/players.vue'
-import settings from '../multi/settings.vue'
-import teams from '../multi/teams.vue'
-import menu from '../multi/menu.vue'
+import matchs from '../pages/matchs.vue'
+import players from '../pages/players.vue'
+import settings from '../pages/settings.vue'
+import teams from '../pages/teams.vue'
+import menu from '../pages/menu.vue'
 
 const routes: RouteRecordRaw[] = [
   {

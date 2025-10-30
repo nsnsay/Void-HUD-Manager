@@ -26,6 +26,7 @@ const messages = {
       deleteFailed: 'Delete failed',
       recordNotFound: 'Record not found',
       upload: 'Upload',
+      select: 'Select',
       remove: 'Remove',
       readImageFailed: 'Failed to read image, please retry',
       unsupportedFormat: 'Only PNG/JPEG/WebP images are supported',
@@ -116,6 +117,98 @@ const messages = {
         lastMatch: 'Last Match',
         openMatchEditor: 'Open Match Editor'
       }
+    },
+    // 菜单页文案
+    menu: {
+      title: 'Menu - Setup & Configuration',
+      step1: {
+        title: 'Step 1: Configure GSI (Important)',
+        content1_prefix: 'In the file picker, choose',
+        content1_suffix: 'to auto-configure GSI.'
+      },
+      step2: {
+        title: 'Step 2: Open Overlay',
+        content1_beforeIcon: 'Open CS2, enter Observer mode, then click the top-right',
+        content1_afterIcon: 'to open HUD mapping.',
+        content2_prefix: 'Run in console',
+        content2_suffix: 'to hide the game HUD'
+      },
+      step3: {
+        title: 'Step 3: Configure OBS or vMix',
+        content1_prefix: 'In OBS or vMix, add a Browser Source, set URL to',
+        content1_suffix: ', ensure the Browser Source is on top.',
+        content2: 'Set the Browser Source width and height to your screen width in px.'
+      },
+      hlae: {
+        titlePrefix: 'Optional: Configure',
+        desc: 'HLAE improves viewing experience. Below are commands you can add to your CFG:',
+        deathmsgTitle: 'Kill feed - player name color customization (CT | T):',
+        moreInfoPrefix: 'More info:'
+      }
+    },
+    // Settings page i18n
+    settings: {
+      manager: {
+        title: 'Manager Settings',
+        seriesName_first: {
+          label: 'Series Name (#1)',
+          desc: 'Name of tournament or whatever you want'
+        },
+        seriesName_second: {
+          label: 'Series Name (#2)',
+          desc: 'Name of tournament or whatever you want'
+        },
+        seriesName_third: {
+          label: 'Series Name (#3) (Not available)',
+          desc: 'Name of tournament or whatever you want'
+        }
+      },
+      overlay: {
+        title: 'Overlay Settings',
+        focusedPlayer: {
+          label: 'Focused Player',
+          desc: 'Show current focusing player on the overlay'
+        },
+        sidebars: {
+          label: 'Sidebars',
+          desc: 'Show sidebars on the overlay'
+        },
+        topbar: {
+          label: 'Topbar',
+          desc: 'Show topbar on the overlay'
+        },
+        radar: {
+          label: 'Radar',
+          desc: 'Show radar on the overlay'
+        },
+        ctColor: {
+          label: 'Counter Terrorist Color',
+          desc: 'Color of the counter terrorist team'
+        },
+        tColor: {
+          label: 'Terrorist Color',
+          desc: 'Color of the terrorist team'
+        },
+        borderRadius: {
+          label: 'Border Radius',
+          desc: 'Border radius of the overlay elements'
+        }
+      },
+      other: {
+        title: 'Other Settings'
+      },
+      toast: {
+        saved: 'Settings saved'
+      }
+    },
+    updater: {
+      title: 'Update',
+      checking: 'Checking for updates…',
+      available: 'Update available: {version}',
+      notAvailable: 'You are up to date',
+      downloading: 'Downloading update… {percent}%',
+      downloaded: 'Update downloaded. It will install on restart.',
+      error: 'Update error'
     }
   },
   zh: {
@@ -143,6 +236,7 @@ const messages = {
       deleteFailed: '删除失败',
       recordNotFound: '记录不存在',
       upload: '上传',
+      select: '选择',
       remove: '移除',
       readImageFailed: '读取图片失败，请重试',
       unsupportedFormat: '仅支持 PNG/JPEG/WebP 格式的图片',
@@ -234,6 +328,98 @@ const messages = {
         lastMatch: '最近比赛',
         openMatchEditor: '打开比赛编辑'
       }
+    },
+    // 菜单页文案
+    menu: {
+      title: '菜单 - 安装与配置',
+      step1: {
+        title: '步骤 1：配置 GSI（重要）',
+        content1_prefix: '在弹出的文件选择窗口中，选择',
+        content1_suffix: '，将自动配置 GSI。'
+      },
+      step2: {
+        title: '步骤 2：打开 Overlay',
+        content1_beforeIcon: '打开 CS2，进入观察者模式，并点击右上角的',
+        content1_afterIcon: '打开 HUD 映射。',
+        content2_prefix: '在控制台中输入',
+        content2_suffix: '隐藏游戏 HUD'
+      },
+      step3: {
+        title: '步骤 3：配置 OBS 或 vMix',
+        content1_prefix: '在 OBS 或 vMix 中，添加一个新的浏览器源，URL 填写',
+        content1_suffix: '，请确保浏览器源置于最上层。',
+        content2: '设置浏览器源的高度、宽度为你的屏幕宽度，单位为 px。'
+      },
+      hlae: {
+        titlePrefix: '可选：配置',
+        desc: 'HLAE 的功能可以更好地帮助观众的观赛体验，以下是 HLAE 命令，可以放置到你自己的 CFG 中：',
+        deathmsgTitle: '击杀信息 - 玩家名字 颜色自定义（CT/T）：',
+        moreInfoPrefix: '其他信息浏览'
+      }
+    },
+    // Settings page i18n
+    settings: {
+      manager: {
+        title: '管理器设置',
+        seriesName_first: {
+          label: '赛事名（#1）',
+          desc: '赛事或任意你想要的名字'
+        },
+        seriesName_second: {
+          label: '赛事名（#2）',
+          desc: '赛事或任意你想要的名字'
+        },
+        seriesName_third: {
+          label: '赛事名（#3）（不可用）',
+          desc: '赛事或任意你想要的名字'
+        }
+      },
+      overlay: {
+        title: 'UI设置',
+        focusedPlayer: {
+          label: '当前聚焦选手',
+          desc: '在UI中显示当前聚焦的选手'
+        },
+        sidebars: {
+          label: '侧边栏',
+          desc: '在UI中显示侧边栏'
+        },
+        topbar: {
+          label: '顶部栏',
+          desc: '在UI中显示顶部栏'
+        },
+        radar: {
+          label: '雷达',
+          desc: '在UI中显示雷达'
+        },
+        ctColor: {
+          label: 'CT 颜色',
+          desc: '反恐精英队伍的颜色'
+        },
+        tColor: {
+          label: 'T 颜色',
+          desc: '恐怖分子队伍的颜色'
+        },
+        borderRadius: {
+          label: 'UI圆角',
+          desc: 'UI的圆角'
+        }
+      },
+      other: {
+        title: '其他设置'
+      },
+      toast: {
+        saved: '设置已保存'
+      }
+    },
+    updater: {
+      title: '更新',
+      checking: '正在检查更新…',
+      available: '发现新版本：{version}',
+      notAvailable: '当前已是最新版本',
+      downloading: '正在下载更新… {percent}%',
+      downloaded: '更新已下载，将在重启后安装',
+      error: '更新检查出错'
     }
   }
 }

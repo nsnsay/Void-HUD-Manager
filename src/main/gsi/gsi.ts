@@ -48,16 +48,16 @@ server.listen(PORT, () => {
 // Register global shortcut F5 to emit realtime: refresh-now
 electronApp.whenReady().then(() => {
   try {
-    const ok = globalShortcut.register('F5', () => {
+    const ok = globalShortcut.register('Ctrl+Alt+F5', () => {
       // Emit to namespace '/realtime' with event 'refresh-now'
       realtime.emit('refresh-now')
-      console.log('F5 shortcut pressed, emitted refresh-now on /realtime')
+      console.log('Ctrl+Alt+F5 shortcut pressed, emitted refresh-now on /realtime')
     })
     if (!ok) {
-      console.warn('Failed to register global shortcut F5')
+      console.warn('Failed to register global shortcut Ctrl+Alt+F5')
     }
   } catch (err) {
-    console.error('Error registering F5 shortcut:', err)
+    console.error('Error registering Ctrl+Alt+F5 shortcut:', err)
   }
 })
 

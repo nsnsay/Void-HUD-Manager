@@ -1,32 +1,34 @@
-# Void HUD Manager
+# void-hud
 
-By @NocYnTwoC（Occasionally Online）
+An Electron application with Vue and TypeScript
 
-## Installation
+## Recommended IDE Setup
 
-[YouTube](https://)
+- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
-1. Download the corresponding version from the [Releases](https://) page
-2. Run `voidhud-1.0.0-setup.exe`
-3. Follow the prompts to complete the installation
-4. Launch **Void HUD Manager**
+## Project Setup
 
-## Development Guide
+### Install
 
-### Developing Void HUD Manager (Main Program)
+```bash
+$ pnpm install
+```
 
-1. Download the source code and install [Node.js](https://)
-2. Open the project using an IDE such as VS Code or JetBrains
-3. Execute `pnpm install` (or `npm install`)
-4. Develop using TypeScript
+### Development
 
-### Developing Void HUD Overlay (Floating Window)
+```bash
+$ pnpm dev
+```
 
-1. Clone the repository [Void-HUD-Overlay](https://) and install [Node.js](https://)
-2. Open the project using an IDE such as VS Code or JetBrains
-3. Execute `pnpm install` (or `npm install`)
-4. Develop using TypeScript + Vue
+### Build
 
----
+```bash
+# For windows
+$ pnpm build:win
 
-##### DOCUMENT NOT COMPLETE :TODO
+# For macOS
+$ pnpm build:mac
+
+# For Linux
+$ pnpm build:linux
+```

@@ -1,12 +1,12 @@
 <template>
     <div class="settings-container">
         <div class="settings-clms manager-settings">
-            <div v-for="column in managerSettings" :key="column.title" class="settings-clm">
-                <div v-if="column.title" class="settings-clm-title">{{ column.title }}</div>
-                <div v-for="item in column.items" :key="item.label" :class="['settings-item', item.type]">
+            <div v-for="(column, cIdx) in managerSettings" :key="cIdx" class="settings-clm">
+                <div v-if="column.titleKey" class="settings-clm-title">{{ t(column.titleKey) }}</div>
+                <div v-for="item in column.items" :key="item.key" :class="['settings-item', item.type]">
                     <div class="settings-item-text">
-                        <div class="label">{{ item.label }}</div>
-                        <div class="desc">{{ item.desc }}</div>
+                        <div class="label">{{ t(item.labelKey) }}</div>
+                        <div class="desc">{{ item.descKey ? t(item.descKey) : '' }}</div>
                     </div>
                     <div v-if="item.type === 'boolean'">
                         <Checkbox v-model="item.value" binary size="large" />
@@ -18,12 +18,12 @@
             </div>
         </div>
         <div class="settings-clms overlay-settings">
-            <div v-for="column in overlaySettings" :key="column.title" class="settings-clm">
-                <div v-if="column.title" class="settings-clm-title">{{ column.title }}</div>
-                <div v-for="item in column.items" :key="item.label" :class="['settings-item', item.type]">
+            <div v-for="(column, cIdx) in overlaySettings" :key="cIdx" class="settings-clm">
+                <div v-if="column.titleKey" class="settings-clm-title">{{ t(column.titleKey) }}</div>
+                <div v-for="item in column.items" :key="item.key" :class="['settings-item', item.type]">
                     <div class="settings-item-text">
-                        <div class="label">{{ item.label }}</div>
-                        <div class="desc">{{ item.desc }}</div>
+                        <div class="label">{{ t(item.labelKey) }}</div>
+                        <div class="desc">{{ item.descKey ? t(item.descKey) : '' }}</div>
                     </div>
                     <div v-if="item.type === 'boolean'">
                         <Checkbox v-model="item.value" binary size="large" />
@@ -38,12 +38,12 @@
             </div>
         </div>
         <div class="settings-clms other-settings">
-            <div v-for="column in otherSettings" :key="column.title" class="settings-clm">
-                <div v-if="column.title" class="settings-clm-title">{{ column.title }}</div>
-                <div v-for="item in column.items" :key="item.label" :class="['settings-item', item.type]">
+            <div v-for="(column, cIdx) in otherSettings" :key="cIdx" class="settings-clm">
+                <div v-if="column.titleKey" class="settings-clm-title">{{ t(column.titleKey) }}</div>
+                <div v-for="item in column.items" :key="item.key" :class="['settings-item', item.type]">
                     <div class="settings-item-text">
-                        <div class="label">{{ item.label }}</div>
-                        <div class="desc">{{ item.desc }}</div>
+                        <div class="label">{{ t(item.labelKey) }}</div>
+                        <div class="desc">{{ item.descKey ? t(item.descKey) : '' }}</div>
                     </div>
                     <div v-if="item.type === 'boolean'">
                         <Checkbox v-model="item.value" binary size="large" />
@@ -147,47 +147,54 @@ import Checkbox from 'primevue/checkbox'
 import InputText from 'primevue/inputtext'
 import { useToast } from 'primevue'
 import ColorPicker from 'primevue/colorpicker'
+import { useI18n } from 'vue-i18n'
 const toast = useToast()
+const { t } = useI18n({ useScope: 'global' })
 
 // Explicit types so the template knows column.items, item.label, item.type, etc.
 type SettingValue = string | boolean
 type SettingType = 'boolean' | 'input' | 'color'
 interface SettingItem {
     key: string
-    label: string
-    desc?: string
+    labelKey: string
+    descKey?: string
     type: SettingType
     value: SettingValue
+    // 兼容旧版本：历史上曾以 label 作为键存储
+    legacyLabel?: string
 }
 interface SettingColumn {
-    title?: string
+    titleKey?: string
     items: SettingItem[]
 }
 
 const managerSettings = ref<SettingColumn[]>([
     {
-        title: 'Manager Settings',
+        titleKey: 'settings.manager.title',
         items: [
             {
                 key: 'seriesName_first',
-                label: 'Series Name (#1)',
-                desc: 'Name of tournament or what ever you want',
+                labelKey: 'settings.manager.seriesName_first.label',
+                descKey: 'settings.manager.seriesName_first.desc',
                 type: 'input',
                 value: 'VoidHUD',
+                legacyLabel: 'Series Name (#1)'
             },
             {
                 key: 'seriesName_second',
-                label: 'Series Name (#2)',
-                desc: 'Name of tournament or what ever you want',
+                labelKey: 'settings.manager.seriesName_second.label',
+                descKey: 'settings.manager.seriesName_second.desc',
                 type: 'input',
                 value: 'VoidHUD',
+                legacyLabel: 'Series Name (#2)'
             },
             {
                 key: 'seriesName_third',
-                label: 'Series Name (#3) (Not available)',
-                desc: 'Name of tournament or what ever you want',
+                labelKey: 'settings.manager.seriesName_third.label',
+                descKey: 'settings.manager.seriesName_third.desc',
                 type: 'input',
                 value: 'VoidHUD',
+                legacyLabel: 'Series Name (#3) (Not available)'
             },
         ]
     },
@@ -195,35 +202,39 @@ const managerSettings = ref<SettingColumn[]>([
 
 const overlaySettings = ref<SettingColumn[]>([
     {
-        title: 'Overlay Settings',
+        titleKey: 'settings.overlay.title',
         items: [
             {
                 key: 'overlayFocusedPlayer',
-                label: 'Focused Player',
-                desc: 'Show current focusing player on the overlay',
+                labelKey: 'settings.overlay.focusedPlayer.label',
+                descKey: 'settings.overlay.focusedPlayer.desc',
                 type: 'boolean',
                 value: true,
+                legacyLabel: 'Focused Player'
             },
             {
                 key: 'overlaySidebars',
-                label: 'Sidebars',
-                desc: 'Show sidebars on the overlay',
+                labelKey: 'settings.overlay.sidebars.label',
+                descKey: 'settings.overlay.sidebars.desc',
                 type: 'boolean',
                 value: true,
+                legacyLabel: 'Sidebars'
             },
             {
                 key: 'overlayTopbar',
-                label: 'Topbar',
-                desc: 'Show topbar on the overlay',
+                labelKey: 'settings.overlay.topbar.label',
+                descKey: 'settings.overlay.topbar.desc',
                 type: 'boolean',
                 value: true,
+                legacyLabel: 'Topbar'
             },
             {
                 key: 'overlayRadar',
-                label: 'Radar',
-                desc: 'Show radar on the overlay',
+                labelKey: 'settings.overlay.radar.label',
+                descKey: 'settings.overlay.radar.desc',
                 type: 'boolean',
                 value: true,
+                legacyLabel: 'Radar'
             }
         ]
     },
@@ -231,24 +242,27 @@ const overlaySettings = ref<SettingColumn[]>([
         items: [
             {
                 key: 'ctColor',
-                label: 'Counter Terrorist Color',
-                desc: 'Color of the counter terrorist team',
+                labelKey: 'settings.overlay.ctColor.label',
+                descKey: 'settings.overlay.ctColor.desc',
                 type: 'color',
                 value: '#286bfa',
+                legacyLabel: 'Counter Terrorist Color'
             },
             {
                 key: 'tColor',
-                label: 'Terrorist Color',
-                desc: 'Color of the terrorist team',
+                labelKey: 'settings.overlay.tColor.label',
+                descKey: 'settings.overlay.tColor.desc',
                 type: 'color',
                 value: '#f52559',
+                legacyLabel: 'Terrorist Color'
             },
             {
                 key: 'borderRadius',
-                label: 'Border Radius',
-                desc: 'Border radius of the overlay elements',
+                labelKey: 'settings.overlay.borderRadius.label',
+                descKey: 'settings.overlay.borderRadius.desc',
                 type: 'input',
                 value: '8px',
+                legacyLabel: 'Border Radius'
             }
         ]
     }
@@ -256,7 +270,7 @@ const overlaySettings = ref<SettingColumn[]>([
 
 const otherSettings = ref<SettingColumn[]>([
     {
-        title: 'Other Settings',
+        titleKey: 'settings.other.title',
         items: [
         ]
     },
@@ -271,7 +285,7 @@ function buildKVFromAll(): Record<string, unknown> {
     const collect = (columns: SettingColumn[]) => {
         for (const column of columns) {
             for (const item of column.items) {
-                const key = (item as any).key ?? (item as any).label
+                const key = item.key
                 kv[key] = item.value
             }
         }
@@ -291,12 +305,12 @@ async function loadSettings() {
         const applyExisting = (columns: SettingColumn[]) => {
             for (const column of columns) {
                 for (const item of column.items) {
-                    const key = (item as any).key ?? (item as any).label
+                    const key = item.key
                     if (key in existing) {
                         item.value = existing[key] as any
-                    } else if (item.label in existing) {
-                        // Compatibility: read old label-key and migrate to key
-                        item.value = existing[item.label] as any
+                    } else if ((item as any).legacyLabel && ((item as any).legacyLabel in existing)) {
+                        // 兼容旧版本：历史上以 label 作为键存储
+                        item.value = existing[(item as any).legacyLabel] as any
                     }
                     // Normalize input type to string to ensure InputText renders correctly
                     if ((item as any).type === 'input' && typeof item.value !== 'string') {
@@ -336,11 +350,11 @@ function scheduleAutoSave() {
             const existing = await window.db.settings.getAll()
             const kv = buildKVFromAll()
             await window.db.settings.setAll({ ...existing, ...kv })
-            toast.add({ severity: 'success', summary: 'Success', detail: 'Settings saved' })
+            toast.add({ severity: 'success', summary: t('common.save'), detail: t('settings.toast.saved') })
         } catch (err) {
             console.error('Auto-save settings failed:', err)
         }
-    }, 300)
+    }, 1500)
 }
 
 onMounted(() => {

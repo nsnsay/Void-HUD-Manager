@@ -3,6 +3,7 @@ import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   main: {
@@ -16,7 +17,7 @@ export default defineConfig({
             dest: 'overlay/file'
           },
           {
-            src: 'src/renderer/src/multi/gamestate_integration_voidhud.cfg',
+            src: 'src/renderer/src/pages/gamestate_integration_voidhud.cfg',
             dest: 'gsi'
           }
         ]
@@ -37,6 +38,6 @@ export default defineConfig({
         '@renderer': resolve('src/renderer/src')
       }
     },
-    plugins: [vue(), vueDevTools()]
+    plugins: [vue(), vueDevTools(), tailwindcss() as any]
   }
 })

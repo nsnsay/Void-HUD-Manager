@@ -9,6 +9,8 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "paths": {
       "@renderer/*": [
         "src/renderer/src/*"

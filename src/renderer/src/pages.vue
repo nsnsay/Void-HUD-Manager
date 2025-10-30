@@ -29,6 +29,7 @@
     width: 100%;
     flex-grow: 1;
 
+
     .window-indicator {
         display: flex;
         align-items: center;
@@ -62,16 +63,33 @@
             justify-content: center;
             padding: 0 1rem;
             cursor: pointer;
-            opacity: 0.6;
-            transition: opacity 0.2s ease-in-out;
+            opacity: 1;
+            transition: color 0.2s ease-in-out;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                width: 75%;
+                height: 2px;
+                background: var(--color-primary);
+                transform: translateX(-50%) scaleX(0);
+                transition: transform 0.2s ease-in-out;
+            }
         }
 
         .window-indicator-item:hover {
-            opacity: 1;
+            color: var(--color-primary);
         }
 
         .window-indicator-item-active {
-            opacity: 1;
+            color: var(--color-primary);
+
+            &::after {
+                transform: translateX(-50%) scaleX(1);
+            }
         }
     }
 

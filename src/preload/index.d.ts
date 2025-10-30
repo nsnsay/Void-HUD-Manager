@@ -64,5 +64,11 @@ declare global {
         setAll: (data: Record<string, any>) => Promise<Record<string, any>>
       }
     }
+    update: {
+      check: () => Promise<{ success: boolean; error?: string }>
+      download: () => Promise<{ success: boolean; error?: string }>
+      quitAndInstall: () => Promise<{ success: boolean; error?: string }>
+      on: (cb: (payload: any) => void) => void
+    }
   }
 }
