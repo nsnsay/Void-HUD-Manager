@@ -23,9 +23,6 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.16
         version: 4.1.16(vite@7.1.10(@types/node@22.18.10)(jiti@2.6.1)(lightningcss@1.30.2)(sass-embedded@1.93.2)(sass@1.93.2))
-      bufferutil:
-        specifier: ^4.0.7
-        version: 4.0.9
       csgogsi:
         specifier: ^4.0.2
         version: 4.0.2
@@ -62,9 +59,6 @@ importers:
       tailwindcss:
         specifier: ^4.1.16
         version: 4.1.16
-      utf-8-validate:
-        specifier: ^6.0.4
-        version: 6.0.5
       vue-i18n:
         specifier: ^11.1.12
         version: 11.1.12(vue@3.5.22(typescript@5.9.3))
@@ -5037,6 +5031,7 @@ snapshots:
   bufferutil@4.0.9:
     dependencies:
       node-gyp-build: 4.8.4
+    optional: true
 
   builder-util-runtime@9.2.10:
     dependencies:
@@ -6434,7 +6429,8 @@ snapshots:
     dependencies:
       semver: 7.7.3
 
-  node-gyp-build@4.8.4: {}
+  node-gyp-build@4.8.4:
+    optional: true
 
   node-gyp@9.4.1:
     dependencies:
@@ -7260,6 +7256,7 @@ snapshots:
   utf-8-validate@6.0.5:
     dependencies:
       node-gyp-build: 4.8.4
+    optional: true
 
   utf8-byte-length@1.0.5: {}
 

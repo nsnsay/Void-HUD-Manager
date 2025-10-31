@@ -28,7 +28,6 @@
     "@fontsource/inter": "^5.2.8",
     "@primeuix/themes": "^1.2.5",
     "@tailwindcss/vite": "^4.1.16",
-    "bufferutil": "^4.0.7",
     "csgogsi": "^4.0.2",
     "electron-updater": "^6.3.9",
     "express": "^5.1.0",
@@ -41,7 +40,6 @@
     "socket-io": "^1.0.0",
     "socket.io": "^4.8.1",
     "tailwindcss": "^4.1.16",
-    "utf-8-validate": "^6.0.4",
     "vue-i18n": "^11.1.12",
     "vue-router": "^4.6.0",
     "ws": "^8.18.3"

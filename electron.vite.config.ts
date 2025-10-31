@@ -25,7 +25,7 @@ export default defineConfig({
     ],
     build: {
       rollupOptions: {
-        external: ['ws', 'bufferutil', 'utf-8-validate']
+        external: ['ws']
       }
     }
   },
