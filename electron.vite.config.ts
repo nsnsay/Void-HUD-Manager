@@ -17,7 +17,7 @@ export default defineConfig({
             dest: 'overlay/file'
           },
           {
-            src: 'src/renderer/src/pages/gamestate_integration_voidhud.cfg',
+            src: 'src/gamestate_integration_voidhud.cfg',
             dest: 'gsi'
           }
         ]
