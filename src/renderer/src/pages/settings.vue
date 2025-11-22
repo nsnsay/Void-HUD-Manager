@@ -40,7 +40,8 @@
         <div class="settings-clms other-settings">
             <div v-for="(column, cIdx) in otherSettings" :key="cIdx" class="settings-clm">
                 <div v-if="column.titleKey" class="settings-clm-title">{{ t(column.titleKey) }}</div>
-                <div v-for="item in column.items" :key="item.key" :class="['settings-item', item.type]">
+                <div v-for="item in column.items" v-if="column.items.length > 0" :key="item.key"
+                    :class="['settings-item', item.type]">
                     <div class="settings-item-text">
                         <div class="label">{{ t(item.labelKey) }}</div>
                         <div class="desc">{{ item.descKey ? t(item.descKey) : '' }}</div>
@@ -83,11 +84,8 @@
             width: 100%;
             flex-direction: column;
             padding: 0.75rem;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.01);
-            border-radius: var(--border-radius);
             gap: 0.5rem;
-            box-shadow: var(--shadow);
+            background: rgba(0, 0, 0, 0.25);
             border: 1px solid var(--border-color-strong);
 
             .settings-clm-title {
@@ -99,6 +97,9 @@
                 font-weight: 500;
                 opacity: 0.6;
                 color: white;
+                background: rgba(0, 0, 0, 0.6);
+                padding: 0.25rem 0;
+                font-weight: 400;
             }
 
             .settings-item {
@@ -116,18 +117,14 @@
                         font-size: 1.1rem;
                         font-weight: 500;
                         opacity: 0.8;
-                        background: linear-gradient(to left, var(--color-primary), var(--color-secondary));
-                        background-clip: text;
-                        color: transparent;
+                        color: white;
                     }
 
                     .desc {
                         font-size: 0.9rem;
                         font-weight: 400;
                         opacity: 0.5;
-                        background: linear-gradient(to right, white, var(--color-secondary));
-                        background-clip: text;
-                        color: transparent;
+                        color: white;
                     }
                 }
 

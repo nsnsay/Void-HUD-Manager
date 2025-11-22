@@ -12,15 +12,16 @@ import ToastService from 'primevue/toastservice'
 import { i18n } from './i18n'
 
 // Font Imports
-import '@fontsource/inter/100'
-import '@fontsource/inter/200'
-import '@fontsource/inter/300'
-import '@fontsource/inter/400'
-import '@fontsource/inter/500'
-import '@fontsource/inter/600'
-import '@fontsource/inter/700'
-import '@fontsource/inter/800'
-import '@fontsource/inter/900'
+import './assets/chinesefonts.scss'
+import '@fontsource/poppins/100'
+import '@fontsource/poppins/200'
+import '@fontsource/poppins/300'
+import '@fontsource/poppins/400'
+import '@fontsource/poppins/500'
+import '@fontsource/poppins/600'
+import '@fontsource/poppins/700'
+import '@fontsource/poppins/800'
+import '@fontsource/poppins/900'
 
 const app = createApp(App)
 

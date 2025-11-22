@@ -31,7 +31,7 @@ import Button from 'primevue/button'
 import { useI18n } from 'vue-i18n'
 
 const props = withDefaults(defineProps<{
-  modelValue: string
+  modelValue: any
   accept?: string
   maxSize?: number
   label?: string

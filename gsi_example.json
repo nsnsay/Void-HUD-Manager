@@ -1,0 +1,1531 @@
+{
+    "provider": {
+        "name": "Counter-Strike: Global Offensive",
+        "appid": 730,
+        "version": 14126,
+        "steamid": "76561199520036290",
+        "timestamp": 1763835122
+    },
+    "observer": {
+        "activity": "playing",
+        "spectarget": "76561198061763596",
+        "position": [
+            2278.9,
+            -447.36,
+            -351.97
+        ],
+        "forward": [
+            -0.96,
+            -0.06,
+            -0.27
+        ]
+    },
+    "round": null,
+    "player": {
+        "steamid": "76561198061763596",
+        "name": "n1ssim",
+        "defaultName": "n1ssim",
+        "observer_slot": 1,
+        "stats": {
+            "kills": 0,
+            "assists": 0,
+            "deaths": 2,
+            "mvps": 0,
+            "score": 0
+        },
+        "weapons": [
+            {
+                "name": "weapon_knife_karambit",
+                "paintkit": "am_ruby_marbleized",
+                "type": "Knife",
+                "state": "holstered",
+                "id": "weapon_0"
+            },
+            {
+                "name": "weapon_usp_silencer",
+                "paintkit": "cu_usp_kill_confirmed",
+                "type": "Pistol",
+                "ammo_clip": 12,
+                "ammo_clip_max": 12,
+                "ammo_reserve": 22,
+                "state": "holstered",
+                "id": "weapon_1"
+            }
+        ],
+        "state": {
+            "health": 100,
+            "armor": 0,
+            "helmet": false,
+            "flashed": 0,
+            "smoked": 0,
+            "burning": 0,
+            "money": 99999,
+            "round_kills": 0,
+            "round_killhs": 0,
+            "round_totaldmg": 0,
+            "equip_value": 700,
+            "adr": 0
+        },
+        "position": [
+            2278.9,
+            -447.36,
+            -351.97
+        ],
+        "forward": [
+            -0.96,
+            -0.06,
+            -0.27
+        ],
+        "team": {
+            "score": 0,
+            "logo": null,
+            "consecutive_round_losses": 1,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 1,
+            "side": "CT",
+            "name": "LEGACY",
+            "country": null,
+            "id": null,
+            "orientation": "right",
+            "extra": {}
+        },
+        "avatar": null,
+        "country": null,
+        "realName": null,
+        "extra": {},
+        "grenades": [
+            {
+                "name": "weapon_incgrenade",
+                "paintkit": "default",
+                "type": "Grenade",
+                "ammo_reserve": 1,
+                "state": "active",
+                "id": "weapon_2"
+            }
+        ],
+        "active_weapon": null,
+        "primary_weapon": null,
+        "secondary_weapon": {
+            "name": "weapon_usp_silencer",
+            "paintkit": "cu_usp_kill_confirmed",
+            "type": "Pistol",
+            "ammo_clip": 12,
+            "ammo_clip_max": 12,
+            "ammo_reserve": 22,
+            "state": "holstered",
+            "id": "weapon_1"
+        },
+        "bomb": null
+    },
+    "players": [
+        {
+            "steamid": "76561198850020186",
+            "name": "latto",
+            "defaultName": "latto",
+            "observer_slot": 0,
+            "stats": {
+                "kills": 8,
+                "assists": 1,
+                "deaths": 7,
+                "mvps": 0,
+                "score": 17
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_push",
+                    "paintkit": "gs_push_autotronic",
+                    "type": "Knife",
+                    "state": "holstered",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_usp_silencer",
+                    "paintkit": "cu_usp_kill_confirmed",
+                    "type": "Pistol",
+                    "ammo_clip": 12,
+                    "ammo_clip_max": 12,
+                    "ammo_reserve": 24,
+                    "state": "holstered",
+                    "id": "weapon_1"
+                },
+                {
+                    "name": "weapon_m4a1_silencer",
+                    "paintkit": "cu_m4a1s_printstream",
+                    "type": "Rifle",
+                    "ammo_clip": 19,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 64,
+                    "state": "active",
+                    "id": "weapon_2"
+                }
+            ],
+            "state": {
+                "health": 78,
+                "armor": 97,
+                "helmet": true,
+                "defusekit": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 64799,
+                "round_kills": 1,
+                "round_killhs": 0,
+                "round_totaldmg": 0,
+                "equip_value": 4500,
+                "adr": 0
+            },
+            "position": [
+                1476.36,
+                -1681.5,
+                -415.97
+            ],
+            "forward": [
+                -0.99,
+                -0.17,
+                -0.01
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "CT",
+                "name": "LEGACY",
+                "country": null,
+                "id": null,
+                "orientation": "right",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "grenades": [],
+            "active_weapon": {
+                "name": "weapon_m4a1_silencer",
+                "paintkit": "cu_m4a1s_printstream",
+                "type": "Rifle",
+                "ammo_clip": 19,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 64,
+                "state": "active",
+                "id": "weapon_2"
+            },
+            "primary_weapon": {
+                "name": "weapon_m4a1_silencer",
+                "paintkit": "cu_m4a1s_printstream",
+                "type": "Rifle",
+                "ammo_clip": 19,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 64,
+                "state": "active",
+                "id": "weapon_2"
+            },
+            "secondary_weapon": {
+                "name": "weapon_usp_silencer",
+                "paintkit": "cu_usp_kill_confirmed",
+                "type": "Pistol",
+                "ammo_clip": 12,
+                "ammo_clip_max": 12,
+                "ammo_reserve": 24,
+                "state": "holstered",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": false
+        },
+        {
+            "steamid": "76561198061763596",
+            "name": "n1ssim",
+            "defaultName": "n1ssim",
+            "observer_slot": 1,
+            "stats": {
+                "kills": 0,
+                "assists": 0,
+                "deaths": 2,
+                "mvps": 0,
+                "score": 0
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_karambit",
+                    "paintkit": "am_ruby_marbleized",
+                    "type": "Knife",
+                    "state": "holstered",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_usp_silencer",
+                    "paintkit": "cu_usp_kill_confirmed",
+                    "type": "Pistol",
+                    "ammo_clip": 12,
+                    "ammo_clip_max": 12,
+                    "ammo_reserve": 22,
+                    "state": "holstered",
+                    "id": "weapon_1"
+                }
+            ],
+            "state": {
+                "health": 100,
+                "armor": 0,
+                "helmet": false,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 99999,
+                "round_kills": 0,
+                "round_killhs": 0,
+                "round_totaldmg": 0,
+                "equip_value": 700,
+                "adr": 0
+            },
+            "position": [
+                2278.9,
+                -447.36,
+                -351.97
+            ],
+            "forward": [
+                -0.96,
+                -0.06,
+                -0.27
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "CT",
+                "name": "LEGACY",
+                "country": null,
+                "id": null,
+                "orientation": "right",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "grenades": [
+                {
+                    "name": "weapon_incgrenade",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "active",
+                    "id": "weapon_2"
+                }
+            ],
+            "active_weapon": null,
+            "primary_weapon": null,
+            "secondary_weapon": {
+                "name": "weapon_usp_silencer",
+                "paintkit": "cu_usp_kill_confirmed",
+                "type": "Pistol",
+                "ammo_clip": 12,
+                "ammo_clip_max": 12,
+                "ammo_reserve": 22,
+                "state": "holstered",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": true
+        },
+        {
+            "steamid": "76561198100494962",
+            "name": "saadzin",
+            "defaultName": "saadzin",
+            "observer_slot": 2,
+            "stats": {
+                "kills": 2,
+                "assists": 0,
+                "deaths": 6,
+                "mvps": 0,
+                "score": 2
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_butterfly",
+                    "paintkit": "am_gamma_doppler_phase4",
+                    "type": "Knife",
+                    "state": "holstered",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_usp_silencer",
+                    "paintkit": "cu_usp_cut",
+                    "type": "Pistol",
+                    "ammo_clip": 12,
+                    "ammo_clip_max": 12,
+                    "ammo_reserve": 24,
+                    "state": "holstered",
+                    "id": "weapon_1"
+                },
+                {
+                    "name": "weapon_awp",
+                    "paintkit": "cu_medieval_dragon_awp",
+                    "type": "SniperRifle",
+                    "ammo_clip": 1,
+                    "ammo_clip_max": 5,
+                    "ammo_reserve": 30,
+                    "state": "active",
+                    "id": "weapon_2"
+                }
+            ],
+            "state": {
+                "health": 68,
+                "armor": 96,
+                "helmet": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 70199,
+                "round_kills": 1,
+                "round_killhs": 0,
+                "round_totaldmg": 0,
+                "equip_value": 5950,
+                "adr": 0
+            },
+            "position": [
+                1314.02,
+                -1369.13,
+                -415.97
+            ],
+            "forward": [
+                -0.72,
+                -0.69,
+                0
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "CT",
+                "name": "LEGACY",
+                "country": null,
+                "id": null,
+                "orientation": "right",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "grenades": [],
+            "active_weapon": {
+                "name": "weapon_awp",
+                "paintkit": "cu_medieval_dragon_awp",
+                "type": "SniperRifle",
+                "ammo_clip": 1,
+                "ammo_clip_max": 5,
+                "ammo_reserve": 30,
+                "state": "active",
+                "id": "weapon_2"
+            },
+            "primary_weapon": {
+                "name": "weapon_awp",
+                "paintkit": "cu_medieval_dragon_awp",
+                "type": "SniperRifle",
+                "ammo_clip": 1,
+                "ammo_clip_max": 5,
+                "ammo_reserve": 30,
+                "state": "active",
+                "id": "weapon_2"
+            },
+            "secondary_weapon": {
+                "name": "weapon_usp_silencer",
+                "paintkit": "cu_usp_cut",
+                "type": "Pistol",
+                "ammo_clip": 12,
+                "ammo_clip_max": 12,
+                "ammo_reserve": 24,
+                "state": "holstered",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": false
+        },
+        {
+            "steamid": "76561198194325317",
+            "name": "dumau",
+            "defaultName": "dumau",
+            "observer_slot": 3,
+            "stats": {
+                "kills": 6,
+                "assists": 0,
+                "deaths": 7,
+                "mvps": 0,
+                "score": 12
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_karambit",
+                    "paintkit": "am_emerald_marbleized",
+                    "type": "Knife",
+                    "state": "holstered",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_usp_silencer",
+                    "paintkit": "sp_ancient_bright",
+                    "type": "Pistol",
+                    "ammo_clip": 12,
+                    "ammo_clip_max": 12,
+                    "ammo_reserve": 24,
+                    "state": "holstered",
+                    "id": "weapon_1"
+                },
+                {
+                    "name": "weapon_ak47",
+                    "paintkit": "am_bamboo_jungle",
+                    "type": "Rifle",
+                    "ammo_clip": 30,
+                    "ammo_clip_max": 30,
+                    "ammo_reserve": 60,
+                    "state": "active",
+                    "id": "weapon_4"
+                }
+            ],
+            "state": {
+                "health": 74,
+                "armor": 97,
+                "helmet": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 71199,
+                "round_kills": 1,
+                "round_killhs": 1,
+                "round_totaldmg": 0,
+                "equip_value": 5200,
+                "adr": 0
+            },
+            "position": [
+                1175.51,
+                -1295.62,
+                -415.97
+            ],
+            "forward": [
+                -0.46,
+                -0.89,
+                0
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "CT",
+                "name": "LEGACY",
+                "country": null,
+                "id": null,
+                "orientation": "right",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "grenades": [
+                {
+                    "name": "weapon_hegrenade",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "holstered",
+                    "id": "weapon_3"
+                },
+                {
+                    "name": "weapon_smokegrenade",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "holstered",
+                    "id": "weapon_2"
+                }
+            ],
+            "active_weapon": {
+                "name": "weapon_ak47",
+                "paintkit": "am_bamboo_jungle",
+                "type": "Rifle",
+                "ammo_clip": 30,
+                "ammo_clip_max": 30,
+                "ammo_reserve": 60,
+                "state": "active",
+                "id": "weapon_4"
+            },
+            "primary_weapon": {
+                "name": "weapon_ak47",
+                "paintkit": "am_bamboo_jungle",
+                "type": "Rifle",
+                "ammo_clip": 30,
+                "ammo_clip_max": 30,
+                "ammo_reserve": 60,
+                "state": "active",
+                "id": "weapon_4"
+            },
+            "secondary_weapon": {
+                "name": "weapon_usp_silencer",
+                "paintkit": "sp_ancient_bright",
+                "type": "Pistol",
+                "ammo_clip": 12,
+                "ammo_clip_max": 12,
+                "ammo_reserve": 24,
+                "state": "holstered",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": false
+        },
+        {
+            "steamid": "76561198074017668",
+            "name": "lux",
+            "defaultName": "lux",
+            "observer_slot": 4,
+            "stats": {
+                "kills": 2,
+                "assists": 1,
+                "deaths": 5,
+                "mvps": 0,
+                "score": 5
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_butterfly",
+                    "paintkit": "aa_fade",
+                    "type": "Knife",
+                    "state": "active",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_hkp2000",
+                    "paintkit": "default",
+                    "type": "Pistol",
+                    "ammo_clip": 13,
+                    "ammo_clip_max": 13,
+                    "ammo_reserve": 52,
+                    "state": "holstered",
+                    "id": "weapon_1"
+                }
+            ],
+            "state": {
+                "health": 100,
+                "armor": 0,
+                "helmet": false,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 74499,
+                "round_kills": 0,
+                "round_killhs": 0,
+                "round_totaldmg": 0,
+                "equip_value": 200,
+                "adr": 0
+            },
+            "position": [
+                2585,
+                -344,
+                -351.97
+            ],
+            "forward": [
+                -0.94,
+                -0.35,
+                0
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "CT",
+                "name": "LEGACY",
+                "country": null,
+                "id": null,
+                "orientation": "right",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "grenades": [],
+            "active_weapon": {
+                "name": "weapon_knife_butterfly",
+                "paintkit": "aa_fade",
+                "type": "Knife",
+                "state": "active",
+                "id": "weapon_0"
+            },
+            "primary_weapon": null,
+            "secondary_weapon": {
+                "name": "weapon_hkp2000",
+                "paintkit": "default",
+                "type": "Pistol",
+                "ammo_clip": 13,
+                "ammo_clip_max": 13,
+                "ammo_reserve": 52,
+                "state": "holstered",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": false
+        },
+        {
+            "steamid": "76561198053126645",
+            "name": "NertZ",
+            "defaultName": "NertZ",
+            "observer_slot": 5,
+            "stats": {
+                "kills": 6,
+                "assists": 0,
+                "deaths": 4,
+                "mvps": 0,
+                "score": 12
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_butterfly",
+                    "paintkit": "am_marble_fade",
+                    "type": "Knife",
+                    "state": "holstered",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_glock",
+                    "paintkit": "default",
+                    "type": "Pistol",
+                    "ammo_clip": 20,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 120,
+                    "state": "holstered",
+                    "id": "weapon_1"
+                },
+                {
+                    "name": "weapon_ak47",
+                    "paintkit": "cu_ak47_cobra",
+                    "type": "Rifle",
+                    "ammo_clip": 30,
+                    "ammo_clip_max": 30,
+                    "ammo_reserve": 90,
+                    "state": "active",
+                    "id": "weapon_2"
+                }
+            ],
+            "state": {
+                "health": 100,
+                "armor": 100,
+                "helmet": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 77299,
+                "round_kills": 0,
+                "round_killhs": 0,
+                "round_totaldmg": 0,
+                "equip_value": 5100,
+                "adr": 0
+            },
+            "position": [
+                369.06,
+                -2221.03,
+                -415.97
+            ],
+            "forward": [
+                0.87,
+                0.5,
+                0
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "T",
+                "name": "Team Liquid",
+                "country": null,
+                "id": null,
+                "orientation": "left",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "grenades": [
+                {
+                    "name": "weapon_hegrenade",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "holstered",
+                    "id": "weapon_4"
+                },
+                {
+                    "name": "weapon_smokegrenade",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "holstered",
+                    "id": "weapon_3"
+                },
+                {
+                    "name": "weapon_molotov",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "holstered",
+                    "id": "weapon_5"
+                }
+            ],
+            "active_weapon": {
+                "name": "weapon_ak47",
+                "paintkit": "cu_ak47_cobra",
+                "type": "Rifle",
+                "ammo_clip": 30,
+                "ammo_clip_max": 30,
+                "ammo_reserve": 90,
+                "state": "active",
+                "id": "weapon_2"
+            },
+            "primary_weapon": {
+                "name": "weapon_ak47",
+                "paintkit": "cu_ak47_cobra",
+                "type": "Rifle",
+                "ammo_clip": 30,
+                "ammo_clip_max": 30,
+                "ammo_reserve": 90,
+                "state": "active",
+                "id": "weapon_2"
+            },
+            "secondary_weapon": {
+                "name": "weapon_glock",
+                "paintkit": "default",
+                "type": "Pistol",
+                "ammo_clip": 20,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 120,
+                "state": "holstered",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": false
+        },
+        {
+            "steamid": "76561198066693739",
+            "name": "EliGE",
+            "defaultName": "EliGE",
+            "observer_slot": 6,
+            "stats": {
+                "kills": 2,
+                "assists": 0,
+                "deaths": 4,
+                "mvps": 0,
+                "score": 4
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_skeleton",
+                    "paintkit": "default",
+                    "type": "Knife",
+                    "state": "active",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_glock",
+                    "paintkit": "default",
+                    "type": "Pistol",
+                    "ammo_clip": 20,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 120,
+                    "state": "holstered",
+                    "id": "weapon_1"
+                },
+                {
+                    "name": "weapon_ak47",
+                    "paintkit": "default",
+                    "type": "Rifle",
+                    "ammo_clip": 30,
+                    "ammo_clip_max": 30,
+                    "ammo_reserve": 90,
+                    "state": "holstered",
+                    "id": "weapon_2"
+                }
+            ],
+            "state": {
+                "health": 100,
+                "armor": 100,
+                "helmet": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 12100,
+                "round_kills": 0,
+                "round_killhs": 0,
+                "round_totaldmg": 0,
+                "equip_value": 5100,
+                "adr": 0
+            },
+            "position": [
+                -1358.28,
+                -1118.53,
+                -415.97
+            ],
+            "forward": [
+                1,
+                -0.03,
+                0.04
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "T",
+                "name": "Team Liquid",
+                "country": null,
+                "id": null,
+                "orientation": "left",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "infos": {
+                "id": 1761729444078,
+                "name": "JamYoung",
+                "realname": "",
+                "steamid": "76561198066693739",
+                "camera": "",
+                "type": "player"
+            },
+            "grenades": [
+                {
+                    "name": "weapon_hegrenade",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "holstered",
+                    "id": "weapon_5"
+                },
+                {
+                    "name": "weapon_flashbang",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "holstered",
+                    "id": "weapon_3"
+                },
+                {
+                    "name": "weapon_smokegrenade",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "holstered",
+                    "id": "weapon_4"
+                },
+                {
+                    "name": "weapon_molotov",
+                    "paintkit": "default",
+                    "type": "Grenade",
+                    "ammo_reserve": 1,
+                    "state": "holstered",
+                    "id": "weapon_6"
+                }
+            ],
+            "active_weapon": {
+                "name": "weapon_knife_skeleton",
+                "paintkit": "default",
+                "type": "Knife",
+                "state": "active",
+                "id": "weapon_0"
+            },
+            "primary_weapon": {
+                "name": "weapon_ak47",
+                "paintkit": "default",
+                "type": "Rifle",
+                "ammo_clip": 30,
+                "ammo_clip_max": 30,
+                "ammo_reserve": 90,
+                "state": "holstered",
+                "id": "weapon_2"
+            },
+            "secondary_weapon": {
+                "name": "weapon_glock",
+                "paintkit": "default",
+                "type": "Pistol",
+                "ammo_clip": 20,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 120,
+                "state": "holstered",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": false
+        },
+        {
+            "steamid": "76561198150673360",
+            "name": "siuhy",
+            "defaultName": "siuhy",
+            "observer_slot": 7,
+            "stats": {
+                "kills": 2,
+                "assists": 0,
+                "deaths": 3,
+                "mvps": 0,
+                "score": 4
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_karambit",
+                    "paintkit": "am_marble_fade",
+                    "type": "Knife",
+                    "state": "holstered",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_glock",
+                    "paintkit": "default",
+                    "type": "Pistol",
+                    "ammo_clip": 20,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 120,
+                    "state": "active",
+                    "id": "weapon_1"
+                }
+            ],
+            "state": {
+                "health": 100,
+                "armor": 0,
+                "helmet": false,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 93899,
+                "round_kills": 0,
+                "round_killhs": 0,
+                "round_totaldmg": 0,
+                "equip_value": 200,
+                "adr": 0
+            },
+            "position": [
+                -1808,
+                -1089,
+                -415.97
+            ],
+            "forward": [
+                0.94,
+                -0.34,
+                0
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "T",
+                "name": "Team Liquid",
+                "country": null,
+                "id": null,
+                "orientation": "left",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "grenades": [],
+            "active_weapon": {
+                "name": "weapon_glock",
+                "paintkit": "default",
+                "type": "Pistol",
+                "ammo_clip": 20,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 120,
+                "state": "active",
+                "id": "weapon_1"
+            },
+            "primary_weapon": null,
+            "secondary_weapon": {
+                "name": "weapon_glock",
+                "paintkit": "default",
+                "type": "Pistol",
+                "ammo_clip": 20,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 120,
+                "state": "active",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": false
+        },
+        {
+            "steamid": "76561198283989223",
+            "name": "ultimate",
+            "defaultName": "ultimate",
+            "observer_slot": 8,
+            "stats": {
+                "kills": 3,
+                "assists": 0,
+                "deaths": 2,
+                "mvps": 0,
+                "score": 6
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_butterfly",
+                    "paintkit": "hy_ocean_knife_90",
+                    "type": "Knife",
+                    "state": "holstered",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_glock",
+                    "paintkit": "am_dragon_glock",
+                    "type": "Pistol",
+                    "ammo_clip": 20,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 120,
+                    "state": "holstered",
+                    "id": "weapon_1"
+                },
+                {
+                    "name": "weapon_ak47",
+                    "paintkit": "cu_fireserpent_ak47_bravo",
+                    "type": "Rifle",
+                    "ammo_clip": 17,
+                    "ammo_clip_max": 30,
+                    "ammo_reserve": 90,
+                    "state": "active",
+                    "id": "weapon_2"
+                }
+            ],
+            "state": {
+                "health": 56,
+                "armor": 92,
+                "helmet": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 92599,
+                "round_kills": 1,
+                "round_killhs": 0,
+                "round_totaldmg": 0,
+                "equip_value": 3900,
+                "adr": 0
+            },
+            "position": [
+                325.75,
+                -1900.66,
+                -415.97
+            ],
+            "forward": [
+                0.98,
+                0.19,
+                0
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "T",
+                "name": "Team Liquid",
+                "country": null,
+                "id": null,
+                "orientation": "left",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "grenades": [],
+            "active_weapon": {
+                "name": "weapon_ak47",
+                "paintkit": "cu_fireserpent_ak47_bravo",
+                "type": "Rifle",
+                "ammo_clip": 17,
+                "ammo_clip_max": 30,
+                "ammo_reserve": 90,
+                "state": "active",
+                "id": "weapon_2"
+            },
+            "primary_weapon": {
+                "name": "weapon_ak47",
+                "paintkit": "cu_fireserpent_ak47_bravo",
+                "type": "Rifle",
+                "ammo_clip": 17,
+                "ammo_clip_max": 30,
+                "ammo_reserve": 90,
+                "state": "active",
+                "id": "weapon_2"
+            },
+            "secondary_weapon": {
+                "name": "weapon_glock",
+                "paintkit": "am_dragon_glock",
+                "type": "Pistol",
+                "ammo_clip": 20,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 120,
+                "state": "holstered",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": false
+        },
+        {
+            "steamid": "76561198001151695",
+            "name": "NAF",
+            "defaultName": "NAF",
+            "observer_slot": 9,
+            "stats": {
+                "kills": 13,
+                "assists": 0,
+                "deaths": 5,
+                "mvps": 0,
+                "score": 26
+            },
+            "weapons": [
+                {
+                    "name": "weapon_knife_karambit",
+                    "paintkit": "am_gamma_doppler_phase2",
+                    "type": "Knife",
+                    "state": "active",
+                    "id": "weapon_0"
+                },
+                {
+                    "name": "weapon_glock",
+                    "paintkit": "cu_glock_noir",
+                    "type": "Pistol",
+                    "ammo_clip": 20,
+                    "ammo_clip_max": 20,
+                    "ammo_reserve": 120,
+                    "state": "holstered",
+                    "id": "weapon_1"
+                },
+                {
+                    "name": "weapon_galilar",
+                    "paintkit": "sp_phoenix_tags_purple",
+                    "type": "Rifle",
+                    "ammo_clip": 21,
+                    "ammo_clip_max": 35,
+                    "ammo_reserve": 90,
+                    "state": "holstered",
+                    "id": "weapon_2"
+                }
+            ],
+            "state": {
+                "health": 100,
+                "armor": 100,
+                "helmet": true,
+                "flashed": 0,
+                "smoked": 0,
+                "burning": 0,
+                "money": 78699,
+                "round_kills": 0,
+                "round_killhs": 0,
+                "round_totaldmg": 0,
+                "equip_value": 3000,
+                "adr": 0
+            },
+            "position": [
+                381.17,
+                -2289.07,
+                -415.97
+            ],
+            "forward": [
+                0.93,
+                0.36,
+                -0.04
+            ],
+            "team": {
+                "score": 0,
+                "logo": null,
+                "consecutive_round_losses": 1,
+                "timeouts_remaining": 3,
+                "matches_won_this_series": 1,
+                "side": "T",
+                "name": "Team Liquid",
+                "country": null,
+                "id": null,
+                "orientation": "left",
+                "extra": {}
+            },
+            "avatar": null,
+            "country": null,
+            "realName": null,
+            "extra": {},
+            "grenades": [],
+            "active_weapon": {
+                "name": "weapon_knife_karambit",
+                "paintkit": "am_gamma_doppler_phase2",
+                "type": "Knife",
+                "state": "active",
+                "id": "weapon_0"
+            },
+            "primary_weapon": {
+                "name": "weapon_galilar",
+                "paintkit": "sp_phoenix_tags_purple",
+                "type": "Rifle",
+                "ammo_clip": 21,
+                "ammo_clip_max": 35,
+                "ammo_reserve": 90,
+                "state": "holstered",
+                "id": "weapon_2"
+            },
+            "secondary_weapon": {
+                "name": "weapon_glock",
+                "paintkit": "cu_glock_noir",
+                "type": "Pistol",
+                "ammo_clip": 20,
+                "ammo_clip_max": 20,
+                "ammo_reserve": 120,
+                "state": "holstered",
+                "id": "weapon_1"
+            },
+            "bomb": null,
+            "isFocused": false
+        }
+    ],
+    "bomb": null,
+    "grenades": [
+        {
+            "owner": "76561198194325317",
+            "lifetime": 2.4,
+            "type": "inferno",
+            "flames": [
+                {
+                    "id": "flame_p747_n2332_n413",
+                    "position": [
+                        747,
+                        -2332,
+                        -413
+                    ]
+                },
+                {
+                    "id": "flame_p724_n2306_n416",
+                    "position": [
+                        724,
+                        -2306,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p688_n2292_n416",
+                    "position": [
+                        688,
+                        -2292,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p652_n2303_n416",
+                    "position": [
+                        652,
+                        -2303,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p775_n2308_n416",
+                    "position": [
+                        775,
+                        -2308,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p790_n2264_n416",
+                    "position": [
+                        790,
+                        -2264,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p817_n2248_n416",
+                    "position": [
+                        817,
+                        -2248,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p746_n2371_n416",
+                    "position": [
+                        746,
+                        -2371,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p813_n2302_n416",
+                    "position": [
+                        813,
+                        -2302,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p761_n2413_n416",
+                    "position": [
+                        761,
+                        -2413,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p702_n2354_n416",
+                    "position": [
+                        702,
+                        -2354,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p790_n2231_n416",
+                    "position": [
+                        790,
+                        -2231,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p720_n2396_n416",
+                    "position": [
+                        720,
+                        -2396,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p847_n2287_n416",
+                    "position": [
+                        847,
+                        -2287,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p738_n2442_n416",
+                    "position": [
+                        738,
+                        -2442,
+                        -416
+                    ]
+                },
+                {
+                    "id": "flame_p667_n2362_n416",
+                    "position": [
+                        667,
+                        -2362,
+                        -416
+                    ]
+                }
+            ],
+            "id": "421"
+        }
+    ],
+    "phase_countdowns": {
+        "phase": "warmup",
+        "phase_ends_in": 5.3
+    },
+    "map": {
+        "mode": "competitive",
+        "name": "de_nuke",
+        "phase": "warmup",
+        "round": 0,
+        "team_ct": {
+            "score": 0,
+            "logo": null,
+            "consecutive_round_losses": 1,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 1,
+            "side": "CT",
+            "name": "LEGACY",
+            "country": null,
+            "id": null,
+            "orientation": "right",
+            "extra": {},
+            "infos": {
+                "id": 1761729374624,
+                "name": "Legacy",
+                "name_ingame": "LEGACY",
+                "type": "Normal"
+            }
+        },
+        "team_t": {
+            "score": 0,
+            "logo": null,
+            "consecutive_round_losses": 1,
+            "timeouts_remaining": 3,
+            "matches_won_this_series": 1,
+            "side": "T",
+            "name": "Team Liquid",
+            "country": null,
+            "id": null,
+            "orientation": "left",
+            "extra": {},
+            "infos": {
+                "id": 1761729387355,
+                "name": "Team Liquid",
+                "name_ingame": "Team Liquid",
+                "type": "Normal"
+            }
+        },
+        "num_matches_to_win_series": 2,
+        "rounds": []
+    },
+    "settings": {
+        "seriesName_first": "BLAST Rival #1",
+        "seriesName_second": "Grand Final",
+        "seriesName_third": "VoidHUD",
+        "overlayFocusedPlayer": true,
+        "overlaySidebars": true,
+        "overlayTopbar": true,
+        "overlayRadar": true,
+        "ctColor": "286efa",
+        "tColor": "f52559",
+        "borderRadius": "0px",
+        "currentMatchId": "current"
+    },
+    "match": {
+        "current": {
+            "id": "current",
+            "team_a": {
+                "id": "1761729374624",
+                "name": "Legacy",
+                "name_ingame": "LEGACY",
+                "type": "Normal"
+            },
+            "team_b": {
+                "id": "1761729387355",
+                "name": "Team Liquid",
+                "name_ingame": "Team Liquid",
+                "type": "Normal"
+            },
+            "type": "BO1",
+            "maps": [
+                {
+                    "name": "de_dust2",
+                    "pickby": "",
+                    "decider": true,
+                    "ascore": 0,
+                    "bscore": 0,
+                    "aid": "1761729374624",
+                    "bid": "1761729387355"
+                }
+            ]
+        }
+    }
+}

@@ -11,30 +11,70 @@ const { t } = useI18n({ useScope: 'global' })
 
 onMounted(() => {
   // 订阅主进程的更新事件并提示 Toast
+  interface UpdatePayload {
+    type: string
+    info?: {
+      version: string
+    }
+    progress?: {
+      percent: number
+    }
+  }
+
   if (window.update) {
-    window.update.on((payload: any) => {
+    window.update.on((payload: UpdatePayload) => {
       switch (payload?.type) {
         case 'checking':
-          toast.add({ severity: 'info', summary: t('updater.title'), detail: t('updater.checking'), life: 3000 })
+          toast.add({
+            severity: 'info',
+            summary: t('updater.title'),
+            detail: t('updater.checking'),
+            life: 3000
+          })
           break
         case 'available': {
           const version = payload?.info?.version ?? ''
-          toast.add({ severity: 'warn', summary: t('updater.title'), detail: t('updater.available', { version }), life: 6000 })
+          toast.add({
+            severity: 'warn',
+            summary: t('updater.title'),
+            detail: t('updater.available', { version }),
+            life: 6000
+          })
           break
         }
         case 'notAvailable':
-          toast.add({ severity: 'success', summary: t('updater.title'), detail: t('updater.notAvailable'), life: 3000 })
+          toast.add({
+            severity: 'success',
+            summary: t('updater.title'),
+            detail: t('updater.notAvailable'),
+            life: 3000
+          })
           break
         case 'downloading': {
           const percent = Math.floor(payload?.progress?.percent ?? 0)
-          toast.add({ severity: 'info', summary: t('updater.title'), detail: t('updater.downloading', { percent }), life: 3000 })
+          toast.add({
+            severity: 'info',
+            summary: t('updater.title'),
+            detail: t('updater.downloading', { percent }),
+            life: 3000
+          })
           break
         }
         case 'downloaded':
-          toast.add({ severity: 'success', summary: t('updater.title'), detail: t('updater.downloaded'), life: 5000 })
+          toast.add({
+            severity: 'success',
+            summary: t('updater.title'),
+            detail: t('updater.downloaded'),
+            life: 5000
+          })
           break
         case 'error':
-          toast.add({ severity: 'error', summary: t('updater.title'), detail: t('updater.error'), life: 5000 })
+          toast.add({
+            severity: 'error',
+            summary: t('updater.title'),
+            detail: t('updater.error'),
+            life: 5000
+          })
           break
       }
     })

@@ -32,7 +32,7 @@ interface Team {
   id: string | number
   name: string
   name_ingame: string
-  avatar: string
+  avatar?: string
   type: 'Normal' | 'Faceit'
 }
 

@@ -6,6 +6,7 @@ import { databaseService } from '../database/database'
 import { join } from 'path'
 import { applyFilters } from './filters'
 import { app as electronApp, globalShortcut } from 'electron'
+import cors from 'cors'
 
 const expressApp = express()
 const GSI = new CSGOGSI()
@@ -22,11 +23,59 @@ const realtime = io.of('/realtime')
 
 expressApp.use(express.urlencoded({ extended: true }))
 expressApp.use(express.json({ limit: '12Mb' }))
+expressApp.use(cors())
 
 // Listen for GSI data
 expressApp.post('/gsi', (req, res) => {
   GSI.digest(req.body)
   res.sendStatus(200)
+})
+
+// Database API
+expressApp.get('/api/players/:steamid', async (req, res) => {
+  try {
+    const { steamid } = req.params
+    const players = await databaseService.players.getAll()
+    const player = players.find((p) => {
+      const pid = String((p as any).steamid ?? (p as any).steamID ?? (p as any).steamId ?? '')
+      return pid === steamid
+    })
+    if (player) res.json(player)
+    else res.status(404).json({ error: 'Player not found' })
+  } catch (e) {
+    res.status(500).json({ error: String(e) })
+  }
+})
+
+expressApp.get('/api/teams/:id', async (req, res) => {
+  try {
+    const { id } = req.params
+    const team = await databaseService.teams.getById(id)
+    if (team) res.json(team)
+    else res.status(404).json({ error: `Team not found, return ${team}` })
+  } catch (e) {
+    res.status(500).json({ error: String(e) })
+  }
+})
+
+expressApp.get('/api/players', async (_req, res) => {
+  const data = await databaseService.players.getAll()
+  res.json(data)
+})
+
+expressApp.get('/api/teams', async (_req, res) => {
+  const data = await databaseService.teams.getAll()
+  res.json(data)
+})
+
+expressApp.get('/api/matchs', async (_req, res) => {
+  const data = await databaseService.matchs.getAll()
+  res.json(data)
+})
+
+expressApp.get('/api/settings', async (_req, res) => {
+  const data = await databaseService.settings.getAll()
+  res.json(data)
 })
 
 expressApp.use('/overlay', express.static(join(__dirname, 'overlay/file')))

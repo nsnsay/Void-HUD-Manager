@@ -79,7 +79,12 @@ export async function injectTeamInfo(data: CSGO): Promise<CSGO> {
       if (!team || typeof team !== 'object') return team
       const key = String(team?.name ?? '').trim()
       const info = teamLookup.get(key)
-      return info ? { ...team, infos: info } : team
+      if (info) {
+        const nextInfo = { ...info }
+        delete nextInfo.avatar
+        return { ...team, infos: nextInfo }
+      }
+      return team
     }
 
     const currentMap = (data as any)?.map
@@ -206,7 +211,12 @@ export async function injectPlayerInfo(data: CSGO): Promise<CSGO> {
       ).trim()
       if (!sid) return pl
       const info = lookup.get(sid)
-      return info ? { ...pl, infos: info } : pl
+      if (info) {
+        const nextInfo = { ...info }
+        delete nextInfo.avatar
+        return { ...pl, infos: nextInfo }
+      }
+      return pl
     }
 
     const nextPlayers = Array.isArray((data as any)?.players)

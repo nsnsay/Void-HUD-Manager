@@ -97,7 +97,8 @@ export class CollectionStore<T extends BaseEntity> {
   async getById(id: EntityId): Promise<T | undefined> {
     return this.queue.enqueue(async () => {
       await this.ensureDefaults()
-      return this.db.data!.items.find((x) => x.id === id)
+      // Use loose equality to match string vs number IDs
+      return this.db.data!.items.find((x) => x.id == id)
     })
   }
 

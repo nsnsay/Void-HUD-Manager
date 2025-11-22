@@ -11,8 +11,8 @@ import { autoUpdater } from 'electron-updater'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1100,
-    height: 700,
+    width: 1150,
+    height: 750,
     show: false,
     frame: false,
     autoHideMenuBar: true,
@@ -79,9 +79,7 @@ app.whenReady().then(() => {
   autoUpdater.on('update-available', (info) => sendUpdate({ type: 'available', info }))
   autoUpdater.on('update-not-available', (info) => sendUpdate({ type: 'notAvailable', info }))
   autoUpdater.on('error', (err) => sendUpdate({ type: 'error', error: String(err) }))
-  autoUpdater.on('download-progress', (progress) =>
-    sendUpdate({ type: 'downloading', progress })
-  )
+  autoUpdater.on('download-progress', (progress) => sendUpdate({ type: 'downloading', progress }))
   autoUpdater.on('update-downloaded', (info) => sendUpdate({ type: 'downloaded', info }))
 
   // 渲染层控制更新流程

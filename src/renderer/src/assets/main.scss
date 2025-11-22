@@ -1,6 +1,6 @@
 // Variables Imports
 @use './variable.scss';
-@use "tailwindcss";
+@use 'tailwindcss';
 
 // Global Styles
 :root {
@@ -22,7 +22,7 @@ body {
   font-size: 14px;
   background-color: var(--background);
   color: var(--text-strong);
-  font-family: 'Inter';
+  font-family: 'Poppins', 'HarmonyOS Sans SC', sans-serif;
 }
 
 .p-select-overlay {
