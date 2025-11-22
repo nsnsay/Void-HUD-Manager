@@ -1,6 +1,6 @@
 {
   "name": "voidhud",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Counter Strike 2 HUD Manager - Open Source, easy to use.",
   "main": "./out/main/index.js",
   "author": "Github@NocYnTwoC",
