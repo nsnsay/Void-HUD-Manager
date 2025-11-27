@@ -1,53 +1,67 @@
 <template>
     <div class="team-card-container">
-        <div v-for="team in teams" :key="team.id" class="team-card">
-            <div class="team-control left">
-                <i class="pi pi-pen-to-square" style="color: var(--color-primary);" @click="openEditTeam(team)"></i>
+        <TransitionGroup name="transform-in" mode="out-in" appear>
+            <div v-for="team in teams" :key="team.id">
+                <DropdownMenu :open="openedContextTeamId === team.id"
+                    @update:open="val => { if (!val && openedContextTeamId === team.id) openedContextTeamId = null }">
+                    <DropdownMenuTrigger asChild>
+                        <div class="team-card" @contextmenu.prevent="openedContextTeamId = team.id">
+                            <div class="team-avatar">
+                                <img :src="team.avatar" alt="Team Avatar" />
+                            </div>
+                            <div class="team-name">{{ team.name }}</div>
+                            <div class="team-name-ingame">{{ team.name_ingame }}</div>
+                        </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem @click="openEditTeam(team)">编辑</DropdownMenuItem>
+                        <DropdownMenuItem variant="destructive" @click="deleteTeam(team.id)">删除</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
-            <div class="team-control">
-                <i class="pi pi-trash" style="color: var(--status-error);" @click="deleteTeam(team.id)"></i>
+        </TransitionGroup>
+        <Transition name="transform-in" mode="out-in">
+            <div class="team-card-add" @click="openCreateTeamForm">
+                <Plus class="size-6" />
             </div>
-            <div class="team-avatar">
-                <img :src="team.avatar" alt="Team Avatar" />
-            </div>
-            <div class="team-name">{{ team.name }}</div>
-            <div class="team-name-ingame">{{ team.name_ingame }}</div>
-        </div>
-        <div class="team-card-add" @click="openCreateTeamForm">
-            <i class="pi pi-plus"></i>
-        </div>
+        </Transition>
     </div>
 
-    <div v-if="showCreateTeamForm" class="create-team-form-container">
-        <div class="form-title">Create Team</div>
-        <div class="input-container">
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-user"></i>
-                </InputGroupAddon>
-                <InputText v-model="createTeamForm.name" :placeholder="t('teams.name')" />
-            </InputGroup>
+    <Transition name="fade" mode="out-in">
+        <div v-if="showCreateTeamForm" class="create-team-form-container">
+            <div class="form-title">Create Team</div>
+            <div class="input-container">
+                <div class="form-input-group">
+                    <User class="size-4 opacity-60" />
+                    <Input v-model="createTeamForm.name" :placeholder="t('teams.name')" />
+                </div>
 
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-id-card"></i>
-                </InputGroupAddon>
-                <InputText v-model="createTeamForm.name_ingame" :placeholder="t('teams.nameIngame')" />
-            </InputGroup>
+                <div class="form-input-group">
+                    <IdCard class="size-4 opacity-60" />
+                    <Input v-model="createTeamForm.name_ingame" :placeholder="t('teams.nameIngame')" />
+                </div>
+            </div>
+            <div class="input-container">
+                <AvatarUpload v-model="createTeamForm.avatar" />
+            </div>
+            <div class="input-container">
+                <Select v-model="createTeamForm.type">
+                    <SelectTrigger class="min-w-[180px]">
+                        <SelectValue :placeholder="t('teams.type')" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem v-for="opt in teamTypeOptions" :key="opt.value" :value="opt.value">{{ opt.label }}
+                        </SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+            <div class="input-container" style="margin-top: 1rem;">
+                <Button variant="destructive" @click="closeCreateTeamForm">{{ t('common.cancel') }}</Button>
+                <Button variant="default" @click="isEditing ? updateTeam() : createTeam()">{{ t('common.save')
+                    }}</Button>
+            </div>
         </div>
-        <div class="input-container">
-            <AvatarUpload v-model="createTeamForm.avatar" />
-        </div>
-        <div class="input-container">
-            <SelectButton v-model="createTeamForm.type" :options="teamTypeOptions" optionLabel="label"
-                optionValue="value" />
-        </div>
-        <div class="input-container" style="margin-top: 1rem;">
-            <Button :label="t('common.cancel')" severity="danger" outlined @click="closeCreateTeamForm" />
-            <Button :label="t('common.save')" severity="success" outlined
-                @click="isEditing ? updateTeam() : createTeam()" />
-        </div>
-    </div>
+    </Transition>
 </template>
 
 <style scoped lang="scss">
@@ -61,7 +75,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 1rem;
     background: var(--background-glass);
     backdrop-filter: blur(10px);
 }
@@ -74,6 +88,7 @@
     width: 100%;
     flex-wrap: wrap;
     gap: 0.5rem;
+    padding: 1rem;
 
     --team-card-width: 160px;
     --team-card-height: 180px;
@@ -86,13 +101,13 @@
         flex-direction: column;
         width: var(--team-card-width);
         height: var(--team-card-height);
-        border-radius: var(--border-radius);
-        background: var(--background-weak);
+        border-radius: var(--radius);
         color: var(--text-strong);
-        box-shadow: var(--shadow);
         font-size: 0.85rem;
         padding: 0.5rem;
         position: relative;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-2xs);
 
         .team-avatar {
             height: 6.5rem;
@@ -128,7 +143,7 @@
             flex-direction: row;
             gap: 0.3rem;
             background: var(--background-weak);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             opacity: 0.4;
 
             &.left {
@@ -144,7 +159,7 @@
                 transition: var(--transition);
                 width: 24px;
                 height: 24px;
-                border-radius: var(--border-radius);
+                border-radius: var(--radius);
 
                 &:hover {
                     background: var(--background-glass);
@@ -162,26 +177,33 @@
         width: var(--team-card-width);
         height: var(--team-card-height);
         background: var(--background-weak);
-        border-radius: var(--border-radius);
+        border-radius: var(--radius);
         padding: 0.5rem;
         cursor: pointer;
         opacity: 0.4;
     }
+}
+
+.form-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
 }
 </style>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import InputGroup from 'primevue/inputgroup';
-import InputGroupAddon from 'primevue/inputgroupaddon';
-import InputText from 'primevue/inputtext';
+import { Input } from '@/components/ui/input'
 import AvatarUpload from '../components/AvatarUpload.vue';
-import Button from 'primevue/button';
-import SelectButton from 'primevue/selectbutton';
-import { useToast } from 'primevue/usetoast'
+import { Button } from '@/components/ui/button'
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
+import { toast } from 'vue-sonner'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
+import { User, IdCard, Plus } from 'lucide-vue-next'
 const { t } = useI18n({ useScope: 'global' })
-const toast = useToast()
+
 
 const showCreateTeamForm = ref(false)
 const isEditing = ref(false)
@@ -193,6 +215,8 @@ const createTeamForm = ref<Team>({
     avatar: '',
     type: 'Normal'
 })
+
+const openedContextTeamId = ref<any>(null)
 
 const teamTypeOptions = ref([
     { label: 'Normal', value: 'Normal' },
@@ -221,12 +245,7 @@ async function loadTeams() {
         const list = await window.db.teams.getAll()
         teams.value = list as Team[]
     } catch (error: any) {
-        toast.add({
-            severity: 'error',
-            summary: t('common.loadFailed'),
-            detail: error?.message ?? t('common.loadFailed'),
-            life: 4000
-        })
+        toast.error(t('common.loadFailed'), { description: error?.message ?? t('common.loadFailed'), duration: 4000 })
     }
 }
 
@@ -243,12 +262,7 @@ async function createTeam() {
     if (!type) missing.push(t('teams.type'))
 
     if (missing.length) {
-        toast.add({
-            severity: 'warn',
-            summary: t('common.missingRequired'),
-            detail: t('common.pleaseFill', { fields: missing.join(' / ') }),
-            life: 3500
-        })
+        toast.warning(t('common.missingRequired'), { description: t('common.pleaseFill', { fields: missing.join(' / ') }), duration: 3500 })
         return
     }
 
@@ -261,17 +275,12 @@ async function createTeam() {
         await window.db.teams.add(newItem)
         await loadTeams()
 
-        toast.add({ severity: 'success', summary: t('common.save'), detail: `${newItem.name}`, life: 3000 })
+        toast.success(t('common.save'), { description: `${newItem.name}`, duration: 3000 })
 
         // reset form
         closeCreateTeamForm()
     } catch (error: any) {
-        toast.add({
-            severity: 'error',
-            summary: t('common.dbWriteFailed'),
-            detail: error?.message ?? t('common.dbWriteFailed'),
-            life: 4000
-        })
+        toast.error(t('common.dbWriteFailed'), { description: error?.message ?? t('common.dbWriteFailed'), duration: 4000 })
     }
 }
 
@@ -291,12 +300,7 @@ async function updateTeam() {
     if (!type) missing.push(t('teams.type'))
 
     if (missing.length) {
-        toast.add({
-            severity: 'warn',
-            summary: t('common.missingRequired'),
-            detail: t('common.pleaseFill', { fields: missing.join(' / ') }),
-            life: 3500
-        })
+        toast.warning(t('common.missingRequired'), { description: t('common.pleaseFill', { fields: missing.join(' / ') }), duration: 3500 })
         return
     }
 
@@ -308,9 +312,9 @@ async function updateTeam() {
         await loadTeams()
         showCreateTeamForm.value = false
         isEditing.value = false
-        toast.add({ severity: 'success', summary: t('common.save'), detail: `${createTeamForm.value.name}`, life: 3000 })
+        toast.success(t('common.save'), { description: `${createTeamForm.value.name}`, duration: 3000 })
     } catch (error: any) {
-        toast.add({ severity: 'error', summary: t('common.dbWriteFailed'), detail: error?.message ?? t('common.dbWriteFailed'), life: 4000 })
+        toast.error(t('common.dbWriteFailed'), { description: error?.message ?? t('common.dbWriteFailed'), duration: 4000 })
     }
 }
 
@@ -320,12 +324,12 @@ async function deleteTeam(id: string | number) {
         const ok = await window.db.teams.remove(id)
         if (ok) {
             await loadTeams()
-            toast.add({ severity: 'success', summary: t('common.deleteSuccess'), life: 2500 })
+            toast.success(t('common.deleteSuccess'), { duration: 2500 })
         } else {
-            toast.add({ severity: 'warn', summary: t('common.deleteFailed'), detail: t('common.recordNotFound'), life: 3000 })
+            toast.warning(t('common.deleteFailed'), { description: t('common.recordNotFound'), duration: 3000 })
         }
     } catch (error: any) {
-        toast.add({ severity: 'error', summary: t('common.deleteFailed'), detail: error?.message ?? t('common.dbWriteFailed'), life: 4000 })
+        toast.error(t('common.deleteFailed'), { description: error?.message ?? t('common.dbWriteFailed'), duration: 4000 })
     }
 }
 </script>

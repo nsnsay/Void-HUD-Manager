@@ -149,7 +149,7 @@ const messages = {
     // Settings page i18n
     settings: {
       manager: {
-        title: 'Manager Settings',
+        title: 'Series Name',
         seriesName_first: {
           label: 'Series Name (#1)',
           desc: 'Name of tournament or whatever you want'
@@ -164,6 +164,7 @@ const messages = {
         }
       },
       overlay: {
+        color: 'Overlay Color',
         title: 'Overlay Settings',
         focusedPlayer: {
           label: 'Focused Player',
@@ -192,10 +193,16 @@ const messages = {
         borderRadius: {
           label: 'Border Radius',
           desc: 'Border radius of the overlay elements'
-        }
+        },
+        row: 'Row Direction',
+        column: 'Column Direction'
       },
       other: {
-        title: 'Other Settings'
+        title: 'Other Settings',
+        shortcutKey: {
+          label: 'Shortcut Key',
+          desc: 'Key to refresh overlay (Restart required)'
+        }
       },
       toast: {
         saved: 'Settings saved'
@@ -360,7 +367,7 @@ const messages = {
     // Settings page i18n
     settings: {
       manager: {
-        title: '管理器设置',
+        title: '赛事名',
         seriesName_first: {
           label: '赛事名（#1）',
           desc: '赛事或任意你想要的名字'
@@ -375,6 +382,7 @@ const messages = {
         }
       },
       overlay: {
+        color: '颜色',
         title: 'UI设置',
         focusedPlayer: {
           label: '当前聚焦选手',
@@ -403,10 +411,16 @@ const messages = {
         borderRadius: {
           label: 'UI圆角',
           desc: 'UI的圆角'
-        }
+        },
+        row: '水平方向',
+        column: '垂直方向'
       },
       other: {
-        title: '其他设置'
+        title: '其他设置',
+        shortcutKey: {
+          label: '刷新快捷键',
+          desc: '刷新UI快捷键 (重启后生效)'
+        }
       },
       toast: {
         saved: '设置已保存'

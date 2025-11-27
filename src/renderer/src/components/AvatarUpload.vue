@@ -3,20 +3,25 @@
     <div class="avatar-upload" :style="uploadStyle" @click="triggerFileSelect">
       <img v-if="modelValue" :src="modelValue" alt="Avatar Preview" />
       <div v-else class="avatar-placeholder">
-        <i :class="placeholderIcon"></i>
+        <User class="size-8 opacity-60" />
       </div>
       <div class="avatar-overlay">
-        <i :class="overlayIcon"></i>
-        <span>Upload</span>
+        <Camera class="size-4 opacity-80" />
+        <span>{{ label }}</span>
       </div>
     </div>
 
     <input ref="fileInputRef" type="file" :accept="accept" @change="onFileChange" hidden />
 
     <div v-if="showActions" class="upload-actions">
-      <Button :label="t('common.remove')" icon="pi pi-trash" severity="danger" outlined @click="clear"
-        :disabled="!modelValue" />
-      <Button :label="t('common.upload')" icon="pi pi-upload" @click="triggerFileSelect" />
+      <Button variant="destructive" @click="clear" :disabled="!modelValue">
+        <Trash class="size-4" />
+        {{ t('common.remove') }}
+      </Button>
+      <Button variant="default" @click="triggerFileSelect">
+        <Upload class="size-4" />
+        {{ t('common.upload') }}
+      </Button>
     </div>
 
     <div class="upload-hints">
@@ -27,7 +32,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import Button from 'primevue/button'
+import { Button } from '@/components/ui/button'
+import { User, Camera, Trash, Upload } from 'lucide-vue-next'
 import { useI18n } from 'vue-i18n'
 
 const props = withDefaults(defineProps<{
@@ -135,7 +141,7 @@ function handleFile(file: File) {
   .avatar-upload {
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--border-color-strong);
+    border: 1px solid var(--border);
     cursor: pointer;
     transition: var(--transition);
 
@@ -155,7 +161,7 @@ function handleFile(file: File) {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--border-color-strong);
+      color: var(--border);
       font-size: 2rem;
     }
 
@@ -198,7 +204,7 @@ function handleFile(file: File) {
   }
 
   .error {
-    color: var(--status-error);
+    color: var(--chart-5);
   }
 }
 </style>

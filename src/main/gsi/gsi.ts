@@ -93,26 +93,36 @@ const PORT = 5031
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
 })
+let shortcutKey = 'Ctrl+Alt+F5'
 
-// Register global shortcut F5 to emit realtime: refresh-now
-electronApp.whenReady().then(() => {
+const getShortcutKey = async () => {
   try {
-    const ok = globalShortcut.register('Ctrl+Alt+F5', () => {
-      // Emit to namespace '/realtime' with event 'refresh-now'
+    const settings = await databaseService.settings.getAll()
+    return settings.shortcutKey || 'Ctrl+Alt+F5'
+  } catch (error) {
+    console.error('Failed to get shortcut key settings:', error)
+    return 'Ctrl+Alt+F5'
+  }
+}
+
+electronApp.whenReady().then(async () => {
+  try {
+    shortcutKey = await getShortcutKey()
+    const ok = globalShortcut.register(shortcutKey, () => {
       realtime.emit('refresh-now')
-      console.log('Ctrl+Alt+F5 shortcut pressed, emitted refresh-now on /realtime')
+      console.log(`${shortcutKey} shortcut pressed, emitted refresh-now on /realtime`)
     })
     if (!ok) {
-      console.warn('Failed to register global shortcut Ctrl+Alt+F5')
+      console.warn(`Failed to register global shortcut ${shortcutKey}`)
     }
   } catch (err) {
-    console.error('Error registering Ctrl+Alt+F5 shortcut:', err)
+    console.error(`Error registering ${shortcutKey} shortcut:`, err)
   }
 })
 
 electronApp.on('will-quit', () => {
   try {
-    globalShortcut.unregister('F5')
+    globalShortcut.unregister(shortcutKey)
     globalShortcut.unregisterAll()
   } catch {}
 })

@@ -22,7 +22,8 @@ function createOverlayWindow(): BrowserWindow {
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
-      sandbox: false
+      sandbox: false,
+      devTools: true
     }
   })
 
@@ -38,7 +39,9 @@ function createOverlayWindow(): BrowserWindow {
   const url = is.dev ? 'http://localhost:5032/' : 'http://localhost:5031/overlay'
   console.log(is.dev)
   overlayWindow.loadURL(url).catch(() => {
-    // ignore load errors here; renderer/logs will reflect if server is unavailable
+    // If url loaded fail, then close window
+    overlayWindow?.close()
+    overlayWindow = null
   })
 
   return overlayWindow

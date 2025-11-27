@@ -196,7 +196,7 @@ export class KeyValueStore<T extends KeyValueData> {
       if ((this.db.data as T)[key] !== undefined) {
         throw new Error(`Key ${String(key)} already exists`)
       }
-      ;(this.db.data as T)[key] = value
+      ; (this.db.data as T)[key] = value
       await this.db.write()
     })
   }
@@ -204,7 +204,7 @@ export class KeyValueStore<T extends KeyValueData> {
   async set<K extends keyof T>(key: K, value: T[K]): Promise<void> {
     return this.queue.enqueue(async () => {
       await this.ensureDefaults()
-      ;(this.db.data as T)[key] = value
+        ; (this.db.data as T)[key] = value
       await this.db.write()
     })
   }
@@ -217,7 +217,7 @@ export class KeyValueStore<T extends KeyValueData> {
         typeof current === 'object' && current !== null
           ? ({ ...current, ...partial } as T[K])
           : (partial as T[K])
-      ;(this.db.data as T)[key] = updated
+        ; (this.db.data as T)[key] = updated
       await this.db.write()
       return updated
     })
@@ -254,16 +254,18 @@ export class DatabaseService {
   readonly teams = new CollectionStore<BaseEntity>(teamsFile)
   readonly players = new CollectionStore<BaseEntity>(playersFile)
   readonly settings = new KeyValueStore<KeyValueData>(settingsFile, {
-    seriesName_first: '你咋感觉好喃',
-    seriesName_second: '志得小人',
-    seriesName_third: 'VoidHUD',
-    overlayFocusedPlayer: true,
-    overlaySidebars: true,
-    overlayTopbar: true,
-    overlayRadar: true,
-    ctColor: '286bfa',
-    tColor: 'f52559',
-    borderRadius: '0px'
+    "seriesName_first": "BLAST Rival #1",
+    "seriesName_second": "Grand Final",
+    "seriesName_third": "VoidHUD",
+    "overlayFocusedPlayer": true,
+    "overlaySidebars": "row",
+    "overlayTopbar": true,
+    "overlayRadar": true,
+    "ctColor": "286efa",
+    "tColor": "f52559",
+    "borderRadius": "0px",
+    "currentMatchId": "current",
+    "shortcutKey": "Ctrl+Alt+I"
   })
   readonly additional = new KeyValueStore<KeyValueData>(additionalFile, {})
 }

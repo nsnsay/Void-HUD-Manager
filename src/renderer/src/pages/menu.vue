@@ -3,19 +3,26 @@
     <div class="menu-title">{{ t('menu.title') }}</div>
     <div class="menu-item">
       <div class="menu-item-title">{{ t('menu.step1.title') }}</div>
-      <div class="menu-item-content">{{ t('menu.step1.content1_prefix') }}<span>CS2.exe</span>{{ t('menu.step1.content1_suffix') }}</div>
-      <Button style="margin-top: 0.5rem;" :label="t('common.select')" size="small" @click="autoPlaceGSI" />
+      <div class="menu-item-content">{{ t('menu.step1.content1_prefix') }}<span>CS2.exe</span>{{
+        t('menu.step1.content1_suffix') }}</div>
+      <Button variant="secondary" style="margin-top: 0.5rem;" @click="autoPlaceGSI">
+        {{ t('common.select') }}
+      </Button>
     </div>
     <div class="menu-item">
       <div class="menu-item-title">{{ t('menu.step2.title') }}</div>
       <div class="menu-item-content">{{ t('menu.step2.content1_beforeIcon') }}
-        <Blend style="margin: 0 0.25rem;" color="var(--status-error)" :size="16" />{{ t('menu.step2.content1_afterIcon') }}
+        <Blend style="margin: 0 0.25rem;" color="var(--color-rose-800)" :size="16" />{{
+          t('menu.step2.content1_afterIcon')
+        }}
       </div>
-      <div class="menu-item-content">{{ t('menu.step2.content2_prefix') }} <span>cl_draw_only_deathnotices 1</span> {{ t('menu.step2.content2_suffix') }}</div>
+      <div class="menu-item-content">{{ t('menu.step2.content2_prefix') }} <span>cl_draw_only_deathnotices 1</span> {{
+        t('menu.step2.content2_suffix') }}</div>
     </div>
     <div class="menu-item">
       <div class="menu-item-title">{{ t('menu.step3.title') }}</div>
-      <div class="menu-item-content">{{ t('menu.step3.content1_prefix') }}<span>http://localhost:5031/overlay</span>{{ t('menu.step3.content1_suffix') }}
+      <div class="menu-item-content">{{ t('menu.step3.content1_prefix') }}<span>http://localhost:5031/overlay</span>{{
+        t('menu.step3.content1_suffix') }}
       </div>
       <div class="menu-item-content">{{ t('menu.step3.content2') }}</div>
     </div>
@@ -45,6 +52,7 @@
   gap: 0.55rem;
   width: 100%;
   height: 100%;
+  padding: 1rem;
 
   .menu-title {
     width: 100%;
@@ -90,7 +98,7 @@
         font-family: 'Consolas', monospace;
         background: var(--background);
         padding: 0.1rem 0.5rem;
-        border-radius: var(--border-radius);
+        border-radius: var(--radius);
 
         &.copy {
           cursor: pointer;
@@ -112,23 +120,22 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useToast } from 'primevue/usetoast'
-import Button from 'primevue/button'
+import { toast } from 'vue-sonner'
+import { Button } from '@/components/ui/button'
 import { Blend } from 'lucide-vue-next'
 
 const { t } = useI18n({ useScope: 'global' })
-const toast = useToast()
 
 async function autoPlaceGSI() {
   try {
     const res = await window.api.autoPlaceGSI()
     if (res?.success) {
-      toast.add({ severity: 'success', summary: 'Success', detail: res.message })
+      toast.success('Success', { description: res.message })
     } else {
-      toast.add({ severity: 'warn', summary: 'Not Completed', detail: res?.message ?? 'Operation canceled or failed' })
+      toast.warning('Not Completed', { description: res?.message ?? 'Operation canceled or failed' })
     }
   } catch (err: any) {
-    toast.add({ severity: 'error', summary: 'Error', detail: String(err?.message ?? err) })
+    toast.error('Error', { description: String(err?.message ?? err) })
   }
 }
 
@@ -137,7 +144,7 @@ async function getSettings() {
     const res = await window.db.settings.getAll()
     return res
   } catch (err: any) {
-    toast.add({ severity: 'error', summary: 'Error', detail: String(err?.message ?? err) })
+    toast.error('Error', { description: String(err?.message ?? err) })
     return null
   }
 }
@@ -174,6 +181,6 @@ const tColorGet = computed(() => {
 
 function copyToClipboard(text: string) {
   navigator.clipboard.writeText(text)
-  toast.add({ severity: 'success', summary: 'Success', detail: `Copied to clipboard: '${text}'` })
+  toast.success('Success', { description: `Copied to clipboard: '${text}'` })
 }
 </script>

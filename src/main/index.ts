@@ -17,12 +17,15 @@ function createWindow(): void {
     frame: false,
     autoHideMenuBar: true,
     fullscreenable: false,
-    resizable: false,
-    maximizable: false,
     icon: appIcon,
+    minWidth: 1150,
+    minHeight: 750,
+    maxWidth: 1500,
+    maxHeight: 1200,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      devTools: true
     }
   })
 
@@ -111,7 +114,7 @@ app.whenReady().then(() => {
   createWindow()
 
   // 应用启动后主动检查更新（不会自动下载）
-  autoUpdater.checkForUpdates().catch(() => {})
+  autoUpdater.checkForUpdates().catch(() => { })
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()

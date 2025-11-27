@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import WindowControls from './components/window-controls/window-controls.vue'
 import Pages from './pages.vue'
-import Toast from 'primevue/toast'
 import { onMounted } from 'vue'
-import { useToast } from 'primevue'
+import { toast } from 'vue-sonner'
 import { useI18n } from 'vue-i18n'
+import { Toaster } from '@/components/ui/sonner'
+import 'vue-sonner/style.css'
 
-const toast = useToast()
 const { t } = useI18n({ useScope: 'global' })
 
 onMounted(() => {
@@ -25,56 +25,26 @@ onMounted(() => {
     window.update.on((payload: UpdatePayload) => {
       switch (payload?.type) {
         case 'checking':
-          toast.add({
-            severity: 'info',
-            summary: t('updater.title'),
-            detail: t('updater.checking'),
-            life: 3000
-          })
+          toast.info(t('updater.title'), { description: t('updater.checking'), duration: 3000 })
           break
         case 'available': {
           const version = payload?.info?.version ?? ''
-          toast.add({
-            severity: 'warn',
-            summary: t('updater.title'),
-            detail: t('updater.available', { version }),
-            life: 6000
-          })
+          toast.warning(t('updater.title'), { description: t('updater.available', { version }), duration: 6000 })
           break
         }
         case 'notAvailable':
-          toast.add({
-            severity: 'success',
-            summary: t('updater.title'),
-            detail: t('updater.notAvailable'),
-            life: 3000
-          })
+          toast.success(t('updater.title'), { description: t('updater.notAvailable'), duration: 3000 })
           break
         case 'downloading': {
           const percent = Math.floor(payload?.progress?.percent ?? 0)
-          toast.add({
-            severity: 'info',
-            summary: t('updater.title'),
-            detail: t('updater.downloading', { percent }),
-            life: 3000
-          })
+          toast.info(t('updater.title'), { description: t('updater.downloading', { percent }), duration: 3000 })
           break
         }
         case 'downloaded':
-          toast.add({
-            severity: 'success',
-            summary: t('updater.title'),
-            detail: t('updater.downloaded'),
-            life: 5000
-          })
+          toast.success(t('updater.title'), { description: t('updater.downloaded'), duration: 5000 })
           break
         case 'error':
-          toast.add({
-            severity: 'error',
-            summary: t('updater.title'),
-            detail: t('updater.error'),
-            life: 5000
-          })
+          toast.error(t('updater.title'), { description: t('updater.error'), duration: 5000 })
           break
       }
     })
@@ -85,7 +55,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <Toast position="bottom-right" />
+  <Toaster position="top-center" />
   <div class="VHApp">
     <WindowControls />
     <Pages />
@@ -126,6 +96,11 @@ onMounted(() => {
       }
     }
 
+    &.right {
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+
     .title {
       font-size: 0.8rem;
       font-weight: 500;
@@ -149,5 +124,35 @@ onMounted(() => {
     left: 50%;
     transform: translateX(-50%);
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+.transform-in-enter-active,
+.transform-in-leave-active {
+  transition: transform 0.3s ease;
+}
+
+.transform-in-enter-from,
+.transform-in-leave-to {
+  transform: translateY(-5%);
+}
+
+.transform-in-enter-to,
+.transform-in-leave-from {
+  transform: translateY(0);
 }
 </style>

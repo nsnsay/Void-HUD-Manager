@@ -1,113 +1,123 @@
 <template>
     <div class="players-card-container">
-        <div class="player-card" v-for="player in Players" :key="player.id">
-            <div class="player-control left">
-                <i class="pi pi-pen-to-square" style="color: var(--color-primary);"
-                    @click="openEditPlayerForm(player)"></i>
+        <TransitionGroup name="transform-in" mode="out-in" appear>
+            <div v-for="player in Players" :key="player.id">
+                <DropdownMenu :open="openedContextPlayerId === player.id"
+                    @update:open="val => { if (!val && openedContextPlayerId === player.id) openedContextPlayerId = null }">
+                    <DropdownMenuTrigger asChild>
+                        <div class="player-card" @contextmenu.prevent="openedContextPlayerId = player.id">
+                            <div class="player-avatar">
+                                <img :src="player.avatar" alt="">
+                            </div>
+                            <div class="player-name">{{ player.name }}</div>
+                            <div class="player-steamid">{{ player.steamid }}</div>
+                        </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem @click="openEditPlayerForm(player)">编辑</DropdownMenuItem>
+                        <DropdownMenuItem variant="destructive" @click="deletePlayer(player.id)">删除</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
-            <div class="player-control">
-                <i class="pi pi-trash" style="color: var(--status-error);" @click="deletePlayer(player.id)"></i>
+        </TransitionGroup>
+        <Transition name="transform-in" mode="out-in">
+            <div class="player-card-add" @click="openCreatePlayerForm">
+                <Plus class="size-6" />
             </div>
-            <div class="player-avatar">
-                <img :src="player.avatar" alt="">
-            </div>
-            <div class="player-name">{{ player.name }}</div>
-            <div class="player-steamid">{{ player.steamid }}</div>
-        </div>
-        <div class="player-card-add" @click="openCreatePlayerForm">
-            <i class="pi pi-plus"></i>
-        </div>
+        </Transition>
     </div>
 
-    <div class="create-player-form-container" v-if="showCreatePlayerForm">
-        <div class="form-title">{{ t('players.createTitle') }}</div>
-        <div class="input-container">
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-user"></i>
-                </InputGroupAddon>
-                <InputText v-model="createPlayerForm.name" :placeholder="t('players.nicknamePlaceholder')" />
-            </InputGroup>
+    <Transition name="fade" mode="out-in">
+        <div class="create-player-form-container" v-if="showCreatePlayerForm">
+            <div class="form-title">{{ t('players.createTitle') }}</div>
+            <div class="input-container">
+                <div class="form-input-group">
+                    <User class="size-4 opacity-60" />
+                    <Input v-model="createPlayerForm.name" :placeholder="t('players.nicknamePlaceholder')" />
+                </div>
 
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-id-card"></i>
-                </InputGroupAddon>
-                <InputText v-model="createPlayerForm.realname" :placeholder="t('players.realnamePlaceholder')" />
-            </InputGroup>
-        </div>
-        <div class="input-container">
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-external-link"></i>
-                </InputGroupAddon>
-                <InputText v-model="createPlayerForm.steamid" :placeholder="t('players.steamidPlaceholder')" />
-            </InputGroup>
+                <div class="form-input-group">
+                    <IdCard class="size-4 opacity-60" />
+                    <Input v-model="createPlayerForm.realname" :placeholder="t('players.realnamePlaceholder')" />
+                </div>
+            </div>
+            <div class="input-container">
+                <div class="form-input-group">
+                    <ExternalLink class="size-4 opacity-60" />
+                    <Input v-model="createPlayerForm.steamid" :placeholder="t('players.steamidPlaceholder')" />
+                </div>
 
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-camera"></i>
-                </InputGroupAddon>
-                <InputText v-model="createPlayerForm.camera" :placeholder="t('players.cameraPlaceholder')" />
-            </InputGroup>
+                <div class="form-input-group">
+                    <Camera class="size-4 opacity-60" />
+                    <Input v-model="createPlayerForm.camera" :placeholder="t('players.cameraPlaceholder')" />
+                </div>
+            </div>
+            <div class="input-container">
+                <AvatarUpload v-model="createPlayerForm.avatar" :label="t('players.uploadAvatar')" />
+            </div>
+            <div class="input-container">
+                <Select v-model="createPlayerForm.type">
+                    <SelectTrigger class="min-w-[180px]">
+                        <SelectValue :placeholder="t('players.type.player')" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem v-for="opt in playerTypeOptions" :key="opt.value" :value="opt.value">{{ opt.label }}
+                        </SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+            <div class="input-container" style="margin-top: 0.5rem;">
+                <Button variant="destructive" @click="closeCreatePlayerForm">{{ t('common.cancel') }}</Button>
+                <Button variant="default" @click="createPlayer">{{ t('common.create') }}</Button>
+            </div>
         </div>
-        <div class="input-container">
-            <AvatarUpload v-model="createPlayerForm.avatar" :label="t('players.uploadAvatar')" />
-        </div>
-        <div class="input-container">
-            <SelectButton v-model="createPlayerForm.type" :options="playerTypeOptions" optionLabel="label"
-                optionValue="value" />
-        </div>
-        <div class="input-container" style="margin-top: 0.5rem;">
-            <Button :label="t('common.cancel')" severity="danger" outlined @click="closeCreatePlayerForm" />
-            <Button :label="t('common.create')" severity="success" outlined @click="createPlayer" />
-        </div>
-    </div>
+    </Transition>
 
-    <div class="edit-player-form-container" v-if="showEditPlayerForm">
-        <div class="form-title">{{ t('players.editTitle') }}</div>
-        <div class="input-container">
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-user"></i>
-                </InputGroupAddon>
-                <InputText v-model="editPlayerForm.name" :placeholder="t('players.nicknamePlaceholder')" />
-            </InputGroup>
+    <Transition name="fade" mode="out-in">
+        <div class="edit-player-form-container" v-if="showEditPlayerForm">
+            <div class="form-title">{{ t('players.editTitle') }}</div>
+            <div class="input-container">
+                <div class="form-input-group">
+                    <User class="size-4 opacity-60" />
+                    <Input v-model="editPlayerForm.name" :placeholder="t('players.nicknamePlaceholder')" />
+                </div>
 
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-id-card"></i>
-                </InputGroupAddon>
-                <InputText v-model="editPlayerForm.realname" :placeholder="t('players.realnamePlaceholder')" />
-            </InputGroup>
-        </div>
-        <div class="input-container">
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-external-link"></i>
-                </InputGroupAddon>
-                <InputText v-model="editPlayerForm.steamid" :placeholder="t('players.steamidPlaceholder')" />
-            </InputGroup>
+                <div class="form-input-group">
+                    <IdCard class="size-4 opacity-60" />
+                    <Input v-model="editPlayerForm.realname" :placeholder="t('players.realnamePlaceholder')" />
+                </div>
+            </div>
+            <div class="input-container">
+                <div class="form-input-group">
+                    <ExternalLink class="size-4 opacity-60" />
+                    <Input v-model="editPlayerForm.steamid" :placeholder="t('players.steamidPlaceholder')" />
+                </div>
 
-            <InputGroup>
-                <InputGroupAddon>
-                    <i class="pi pi-camera"></i>
-                </InputGroupAddon>
-                <InputText v-model="editPlayerForm.camera" :placeholder="t('players.cameraPlaceholder')" />
-            </InputGroup>
+                <div class="form-input-group">
+                    <Camera class="size-4 opacity-60" />
+                    <Input v-model="editPlayerForm.camera" :placeholder="t('players.cameraPlaceholder')" />
+                </div>
+            </div>
+            <div class="input-container">
+                <AvatarUpload v-model="editPlayerForm.avatar" :label="t('players.uploadAvatar')" />
+            </div>
+            <div class="input-container">
+                <Select v-model="editPlayerForm.type">
+                    <SelectTrigger class="min-w-[180px]">
+                        <SelectValue :placeholder="t('players.type.player')" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem v-for="opt in playerTypeOptions" :key="opt.value" :value="opt.value">{{ opt.label }}
+                        </SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+            <div class="input-container" style="margin-top: 0.5rem;">
+                <Button variant="destructive" @click="closeEditPlayerForm">{{ t('common.cancel') }}</Button>
+                <Button variant="default" @click="updatePlayer">{{ t('common.save') }}</Button>
+            </div>
         </div>
-        <div class="input-container">
-            <AvatarUpload v-model="editPlayerForm.avatar" :label="t('players.uploadAvatar')" />
-        </div>
-        <div class="input-container">
-            <SelectButton v-model="editPlayerForm.type" :options="playerTypeOptions" optionLabel="label"
-                optionValue="value" />
-        </div>
-        <div class="input-container" style="margin-top: 0.5rem;">
-            <Button :label="t('common.cancel')" severity="danger" outlined @click="closeEditPlayerForm" />
-            <Button :label="t('common.save')" severity="success" outlined @click="updatePlayer" />
-        </div>
-    </div>
+    </Transition>
 </template>
 
 <style scoped lang="scss">
@@ -120,7 +130,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     width: 100%;
     height: 100%;
     background: var(--background-glass);
@@ -142,7 +152,7 @@
     gap: 0.5rem;
     width: 100%;
     height: 100%;
-
+    padding: 1rem;
     --player-card-width: 160px;
     --player-card-height: 180px;
 
@@ -154,9 +164,9 @@
         gap: 0.6rem;
         width: var(--player-card-width);
         height: var(--player-card-height);
-        background: var(--background-weak);
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-2xs);
         padding: 0.5rem;
         position: relative;
 
@@ -170,7 +180,7 @@
             flex-direction: row;
             gap: 0.3rem;
             background: var(--background-weak);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             opacity: 0.4;
 
             &.left {
@@ -186,7 +196,7 @@
                 transition: var(--transition);
                 width: 24px;
                 height: 24px;
-                border-radius: var(--border-radius);
+                border-radius: var(--radius);
 
                 &:hover {
                     background: var(--background-glass);
@@ -228,42 +238,45 @@
         width: var(--player-card-width);
         height: var(--player-card-height);
         background: var(--background-weak);
-        border-radius: var(--border-radius);
+        border-radius: var(--radius);
         padding: 0.5rem;
         cursor: pointer;
         opacity: 0.4;
     }
 }
+
+.form-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
 </style>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
-import InputGroup from 'primevue/inputgroup';
-import InputGroupAddon from 'primevue/inputgroupaddon';
-import InputText from 'primevue/inputtext';
-import SelectButton from 'primevue/selectbutton';
+import { Input } from '@/components/ui/input'
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import AvatarUpload from '../components/AvatarUpload.vue';
-import Button from 'primevue/button';
-import { useToast } from "primevue/usetoast";
+import { Button } from '@/components/ui/button'
+import { toast } from 'vue-sonner'
 import { useI18n } from 'vue-i18n'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu'
+import { User, IdCard, ExternalLink, Camera, Plus } from 'lucide-vue-next'
 
-const toast = useToast();
+
 const { t } = useI18n({ useScope: 'global' })
 
 
 const Players = ref<Player[]>([])
+const openedContextPlayerId = ref<any>(null)
 
 async function loadPlayers() {
     try {
         const list = await window.db.players.getAll()
         Players.value = list as Player[]
     } catch (error: any) {
-        toast.add({
-            severity: 'error',
-            summary: t('common.loadFailed'),
-            detail: error?.message ?? t('common.loadFailed'),
-            life: 4000
-        })
+        toast.error(t('common.loadFailed'), { description: error?.message ?? t('common.loadFailed'), duration: 4000 })
     }
 }
 
@@ -302,12 +315,7 @@ async function createPlayer() {
     if (!type) missing.push(t('players.type.player'))
 
     if (missing.length) {
-        toast.add({
-            severity: 'warn',
-            summary: t('common.missingRequired'),
-            detail: t('common.pleaseFill', { fields: missing.join(' / ') }),
-            life: 3500
-        })
+        toast.warning(t('common.missingRequired'), { description: t('common.pleaseFill', { fields: missing.join(' / ') }), duration: 3500 })
         return
     }
 
@@ -321,7 +329,7 @@ async function createPlayer() {
         await window.db.players.add(newItem)
         await loadPlayers()
 
-        toast.add({ severity: 'success', summary: t('players.toast.createSuccess'), detail: `${newItem.name}`, life: 3000 })
+        toast.success(t('players.toast.createSuccess'), { description: `${newItem.name}`, duration: 3000 })
 
         // clear form
         createPlayerForm.value = {
@@ -335,12 +343,7 @@ async function createPlayer() {
         }
         showCreatePlayerForm.value = false
     } catch (error: any) {
-        toast.add({
-            severity: 'error',
-            summary: t('players.toast.createFailed'),
-            detail: error?.message ?? t('common.dbWriteFailed'),
-            life: 4000
-        })
+        toast.error(t('players.toast.createFailed'), { description: error?.message ?? t('common.dbWriteFailed'), duration: 4000 })
     }
 }
 
@@ -373,12 +376,7 @@ async function updatePlayer() {
     if (!type) missing.push(t('players.type.player'))
 
     if (missing.length) {
-        toast.add({
-            severity: 'warn',
-            summary: t('common.missingRequired'),
-            detail: t('common.pleaseFill', { fields: missing.join(' / ') }),
-            life: 3500
-        })
+        toast.warning(t('common.missingRequired'), { description: t('common.pleaseFill', { fields: missing.join(' / ') }), duration: 3500 })
         return
     }
 
@@ -389,9 +387,9 @@ async function updatePlayer() {
 
         await loadPlayers()
         showEditPlayerForm.value = false
-        toast.add({ severity: 'success', summary: t('players.toast.updateSuccess'), detail: `${editPlayerForm.value.name}`, life: 3000 })
+        toast.success(t('players.toast.updateSuccess'), { description: `${editPlayerForm.value.name}`, duration: 3000 })
     } catch (error: any) {
-        toast.add({ severity: 'error', summary: t('players.toast.updateFailed'), detail: error?.message ?? t('common.dbWriteFailed'), life: 4000 })
+        toast.error(t('players.toast.updateFailed'), { description: error?.message ?? t('common.dbWriteFailed'), duration: 4000 })
     }
 }
 
@@ -400,12 +398,12 @@ async function deletePlayer(id: string | number) {
         const ok = await window.db.players.remove(id)
         if (ok) {
             await loadPlayers()
-            toast.add({ severity: 'success', summary: t('common.deleteSuccess'), life: 2500 })
+            toast.success(t('common.deleteSuccess'), { duration: 2500 })
         } else {
-            toast.add({ severity: 'warn', summary: t('common.deleteFailed'), detail: t('common.recordNotFound'), life: 3000 })
+            toast.warning(t('common.deleteFailed'), { description: t('common.recordNotFound'), duration: 3000 })
         }
     } catch (error: any) {
-        toast.add({ severity: 'error', summary: t('common.deleteFailed'), detail: error?.message ?? t('common.dbWriteFailed'), life: 4000 })
+        toast.error(t('common.deleteFailed'), { description: error?.message ?? t('common.dbWriteFailed'), duration: 4000 })
     }
 }
 

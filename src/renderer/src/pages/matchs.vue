@@ -1,147 +1,142 @@
 <template>
-  <div class="match-form">
-    <div class="form-title top">{{ t('multi.matchForm.title') }}</div>
-    <div class="input-container">
-      <div class="inp-lab">
-        <div class="title">
-          <div v-if="selectedTeamA?.name">{{ selectedTeamA?.name }}</div>
-          <div v-else>{{ t('multi.matchForm.teamA') }}</div>
-        </div>
-        <InputGroup>
-          <Select v-model="matchForm.team_a.id" :options="availableTeamsForA" optionLabel="name" optionValue="id"
-            :placeholder="t('multi.matchForm.selectTeamA')" show-clear />
-        </InputGroup>
+  <div class="container mx-auto max-w-5xl p-4 sm:p-6">
+    <div class="space-y-6">
+      <div class="flex items-center justify-between">
+        <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">{{ t('multi.matchForm.title') }}</h1>
       </div>
-      <div class="inp-lab">
-        <div class="title right">
-          <div v-if="selectedTeamB?.name">{{ selectedTeamB?.name }}</div>
-          <div v-else>{{ t('multi.matchForm.teamB') }}</div>
-        </div>
-        <InputGroup>
-          <Select v-model="matchForm.team_b.id" :options="availableTeamsForB" optionLabel="name" optionValue="id"
-            :placeholder="t('multi.matchForm.selectTeamB')" show-clear />
-        </InputGroup>
-      </div>
-    </div>
-    <div class="input-container">
-      <div class="inp-lab">
-        <div class="title">
-          {{ t('multi.matchForm.type') }}
-        </div>
-        <Select v-model="matchForm.type" :options="types" optionLabel="name" optionValue="label" />
-      </div>
-    </div>
-    <div class="maps-container">
-      <div v-for="(map, index) in matchForm.maps" :key="index" class="map-item">
-        <div class="map-number">{{ t('multi.matchForm.mapNumber', { n: index + 1 }) }}</div>
-        <div class="input-container">
-          <div class="inp-lab">
-            <div class="title">
-              {{ t('matchForm.map') }}
-            </div>
-            <Select v-model="map.name" :options="mapOptions" default-value="de_inferno" optionLabel="name"
-              optionValue="label" :placeholder="t('multi.matchForm.selectMap')"
-              style="min-width: 140px; max-width: 140px" />
-          </div>
-          <div class="inp-lab">
-            <div class="title">
-              {{ t('matchForm.pickBy') }}
-            </div>
-            <Select v-model="map.pickby" :options="teamOptions" optionLabel="name" optionValue="id"
-              :placeholder="t('multi.matchForm.selectPicker')" style="min-width: 160px; max-width: 160px"
-              :disabled="map.decider" />
-          </div>
-          <div class="inp-lab">
-            <div class="title">
-              {{ t('matchForm.team_a.score') }}
-            </div>
-            <InputText v-model="map.ascore" :min="0" style="width: 100px" />
-          </div>
-          <div class="inp-lab">
-            <div class="title">
-              {{ t('matchForm.team_b.score') }}
-            </div>
-            <InputText v-model="map.bscore" :min="0" style="width: 100px" />
-          </div>
-          <div class="inp-lab center">
-            <div class="title">
-              {{ t('matchForm.decider') }}
-            </div>
-            <Checkbox v-model="map.decider" binary />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="input-container">
-      <Button @click="resetForm" type="reset" :label="t('common.reset')" />
-      <Button @click="submitForm" type="submit" :label="t('common.submit')" />
-    </div>
 
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <div class="text-sm font-medium text-muted-foreground">
+            {{ selectedTeamA?.name ?? t('multi.matchForm.teamA') }}
+          </div>
+          <Select v-model="matchForm.team_a.id"
+            @update:model-value="val => matchForm.team_a.id = (val === '__none__' ? '' : String(val))">
+            <SelectTrigger class="w-full sm:w-[220px]">
+              <SelectValue :placeholder="t('multi.matchForm.selectTeamA')" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="__none__">{{ t('common.select') }}</SelectItem>
+              <SelectItem v-for="team in availableTeamsForA" :key="team.id" :value="String(team.id)">{{ team.name }}
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div class="space-y-2">
+          <div class="text-sm font-medium text-muted-foreground">
+            {{ selectedTeamB?.name ?? t('multi.matchForm.teamB') }}
+          </div>
+          <Select v-model="matchForm.team_b.id"
+            @update:model-value="val => matchForm.team_b.id = (val === '__none__' ? '' : String(val))">
+            <SelectTrigger class="w-full sm:w-[220px]">
+              <SelectValue :placeholder="t('multi.matchForm.selectTeamB')" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="__none__">{{ t('common.select') }}</SelectItem>
+              <SelectItem v-for="team in availableTeamsForB" :key="team.id" :value="String(team.id)">{{ team.name }}
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-2">
+          <div class="text-sm font-medium text-muted-foreground">{{ t('multi.matchForm.type') }}</div>
+          <Select v-model="matchForm.type">
+            <SelectTrigger class="w-full md:w-[160px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem v-for="it in types" :key="it.label" :value="it.label">{{ it.name }}</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      <Separator />
+
+      <div class="space-y-4">
+        <div class="max-h-[420px] overflow-y-auto">
+          <TransitionGroup tag="div" class="space-y-4" enter-active-class="transition duration-200"
+            enter-from-class="opacity-0 -translate-y-1" enter-to-class="opacity-100 translate-y-0"
+            leave-active-class="transition duration-150" leave-from-class="opacity-100 translate-y-0"
+            leave-to-class="opacity-0 -translate-y-1">
+            <div v-for="(map, index) in matchForm.maps" :key="index"
+              class="rounded-lg border bg-card text-card-foreground shadow-sm p-4 md:p-5 transition-colors">
+              <div class="flex items-center justify-between mb-3">
+                <div class="text-xs font-medium text-muted-foreground">{{ t('multi.matchForm.mapNumber', {
+                  n: index + 1
+                }) }}</div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-7 gap-3 md:gap-4">
+                <div class="md:col-span-2 space-y-2">
+                  <div class="text-xs font-medium text-muted-foreground">{{ t('matchForm.map') }}</div>
+                  <Select v-model="map.name">
+                    <SelectTrigger class="w-full">
+                      <SelectValue :placeholder="t('multi.matchForm.selectMap')" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem v-for="m in mapOptions" :key="m.label" :value="m.label">{{ m.name }}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div class="md:col-span-2 space-y-2">
+                  <div class="text-xs font-medium text-muted-foreground">{{ t('matchForm.pickBy') }}</div>
+                  <Select v-model="map.pickby" :disabled="map.decider"
+                    @update:model-value="val => map.pickby = (val === '__none__' ? '' : String(val))">
+                    <SelectTrigger class="w-full">
+                      <SelectValue :placeholder="t('multi.matchForm.selectPicker')" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="__none__">{{ t('common.select') }}</SelectItem>
+                      <SelectItem v-for="t in teamOptions" :key="t.id" :value="String(t.id)">{{ t.name }}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div class="md:col-span-1 space-y-2">
+                  <div class="text-xs font-medium text-muted-foreground">{{ t('matchForm.team_a.score') }}</div>
+                  <Input v-model="map.ascore" type="number" :min="0" class="w-full" />
+                </div>
+                <div class="md:col-span-1 space-y-2">
+                  <div class="text-xs font-medium text-muted-foreground">{{ t('matchForm.team_b.score') }}</div>
+                  <Input v-model="map.bscore" type="number" :min="0" class="w-full" />
+                </div>
+                <div class="md:col-span-1 flex md:items-center md:justify-center">
+                  <div class="space-y-2">
+                    <div class="text-xs font-medium text-muted-foreground">{{ t('matchForm.decider') }}</div>
+                    <Checkbox v-model="map.decider" aria-label="decider" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </TransitionGroup>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <Button @click="resetForm" variant="outline" type="reset" aria-label="reset">{{ t('common.reset') }}</Button>
+        <Button @click="submitForm" type="submit" aria-label="submit">{{ t('common.submit') }}</Button>
+      </div>
+    </div>
   </div>
 </template>
 
-<style scoped lang="scss">
-.match-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-  height: 100%;
-  position: relative;
 
-  .maps-container {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 1rem;
-    width: 75%;
-    height: 300px;
-    background: var(--background-glass);
-    border-radius: var(--border-radius);
-    overflow-y: auto;
-    padding: 1rem;
-
-    .map-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-      height: 33%;
-      background: var(--background-glass);
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      position: relative;
-      flex-shrink: 0;
-
-      .map-number {
-        position: absolute;
-        left: 1rem;
-        font-weight: 600;
-        font-size: 0.7rem;
-        opacity: 0.7;
-      }
-    }
-  }
-}
-</style>
 
 <script setup lang="ts">
 import { onMounted, ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-import InputGroup from 'primevue/inputgroup';
-import InputText from 'primevue/inputtext';
-import Select from 'primevue/select';
-import Checkbox from 'primevue/checkbox';
-import Button from 'primevue/button';
-import { useToast } from 'primevue/usetoast';
+import { Input } from '@/components/ui/input'
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Button } from '@/components/ui/button'
+import { Separator } from '@/components/ui/separator'
+import { toast } from 'vue-sonner'
 
-const toast = useToast();
+
 const { t } = useI18n()
 const teams = ref<Team[]>([])
 const types = ref([
@@ -189,12 +184,7 @@ async function loadTeams() {
     const list = await window.db.teams.getAll()
     teams.value = Array.isArray(list) ? list as Team[] : (Object.values(list) as Team[])
   } catch (error: any) {
-    toast.add({
-      severity: 'error',
-      summary: t('common.loadFailed'),
-      detail: error?.message ?? t('common.loadFailed'),
-      life: 4000
-    })
+    toast.error(t('common.loadFailed'), { description: error?.message ?? t('common.loadFailed'), duration: 4000 })
   }
 }
 const matchForm = ref<Match>({
@@ -339,7 +329,7 @@ async function autoLoadMatch() {
     // Fix data and decider by type
     adjustMapsLengthByType()
   } catch (error: any) {
-    toast.add({ severity: 'warn', summary: t('common.loadFailed'), detail: error?.message ?? t('common.loadFailed'), life: 3000 })
+    toast.warning(t('common.loadFailed'), { description: error?.message ?? t('common.loadFailed'), duration: 3000 })
   }
 }
 
@@ -371,11 +361,7 @@ function resetForm() {
       }
     ],
   }
-  toast.add({
-    severity: 'info',
-    summary: t('common.resetSuccess') ?? 'Reset',
-    life: 2000
-  })
+  toast.info(t('common.resetSuccess') ?? 'Reset', { duration: 2000 })
 }
 
 function validateForm(): string | null {
@@ -406,12 +392,7 @@ function validateForm(): string | null {
 async function submitForm() {
   const err = validateForm()
   if (err) {
-    toast.add({
-      severity: 'warn',
-      summary: t('common.validateFailed') ?? 'Validation Failed',
-      detail: err,
-      life: 4000
-    })
+    toast.warning(t('common.validateFailed') ?? 'Validation Failed', { description: err, duration: 4000 })
     return
   }
   // Ensure selected team details are hydrated before saving
@@ -469,18 +450,9 @@ async function submitForm() {
 
     await window.db.settings.set('currentMatchId', targetId)
     matchForm.value.id = targetId
-    toast.add({
-      severity: 'success',
-      summary: didModify ? (t('common.modifySuccess') ?? 'Updated') : (t('common.addSuccess') ?? 'Added'),
-      life: 3000
-    })
+    toast.success(didModify ? (t('common.modifySuccess') ?? 'Updated') : (t('common.addSuccess') ?? 'Added'), { duration: 3000 })
   } catch (error: any) {
-    toast.add({
-      severity: 'error',
-      summary: t('common.saveFailed') ?? 'Save Failed',
-      detail: error?.message ?? t('common.saveFailed'),
-      life: 4000
-    })
+    toast.error(t('common.saveFailed') ?? 'Save Failed', { description: error?.message ?? t('common.saveFailed'), duration: 4000 })
   }
 }
 
