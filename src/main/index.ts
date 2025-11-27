@@ -2,11 +2,13 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import appIcon from './logo.png?asset'
-import { registerDatabaseIPC } from './database/database'
+import { registerDatabaseIPC, databaseService } from './database/database'
 import './gsi/gsi'
 import './overlay/overlay'
 import { registerAutoPlaceGSIIPC } from './gsi/auto-place'
 import { autoUpdater } from 'electron-updater'
+
+let acrylicEnabledSetting = true
 
 function createWindow(): void {
   // Create the browser window.
@@ -29,6 +31,17 @@ function createWindow(): void {
     }
   })
 
+  if (process.platform === 'win32' && acrylicEnabledSetting) {
+    const applyAcrylic = (): void => {
+      try {
+        mainWindow.setBackgroundMaterial('acrylic')
+      } catch { }
+    }
+    applyAcrylic()
+    mainWindow.on('blur', applyAcrylic)
+    mainWindow.on('focus', applyAcrylic)
+  }
+
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })
@@ -50,7 +63,7 @@ function createWindow(): void {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   electronApp.setAppUserModelId('com.electron')
 
   app.on('browser-window-created', (_, window) => {
@@ -61,8 +74,14 @@ app.whenReady().then(() => {
     BrowserWindow.getFocusedWindow()?.minimize()
   })
   ipcMain.on('close', () => {
-    BrowserWindow.getFocusedWindow()?.close()
+    BrowserWindow.getAllWindows().forEach((win) => win.close())
   })
+
+  // 读取毛玻璃设置
+  try {
+    const enabled = await databaseService.settings.get('acrylicEnabled')
+    acrylicEnabledSetting = enabled == null ? true : Boolean(enabled)
+  } catch { }
 
   // 注册数据库 IPC
   registerDatabaseIPC(ipcMain)
@@ -70,20 +89,23 @@ app.whenReady().then(() => {
   registerAutoPlaceGSIIPC(ipcMain)
 
   // 更新状态下发到渲染层
-  const sendUpdate = (payload: any) => {
+  const sendUpdate = (payload: unknown): void => {
     const win = BrowserWindow.getAllWindows()[0]
     win?.webContents.send('updater:status', payload)
   }
 
   // electron-updater 配置与事件
-  autoUpdater.autoDownload = false
+  autoUpdater.autoDownload = true
 
   autoUpdater.on('checking-for-update', () => sendUpdate({ type: 'checking' }))
   autoUpdater.on('update-available', (info) => sendUpdate({ type: 'available', info }))
   autoUpdater.on('update-not-available', (info) => sendUpdate({ type: 'notAvailable', info }))
   autoUpdater.on('error', (err) => sendUpdate({ type: 'error', error: String(err) }))
   autoUpdater.on('download-progress', (progress) => sendUpdate({ type: 'downloading', progress }))
-  autoUpdater.on('update-downloaded', (info) => sendUpdate({ type: 'downloaded', info }))
+  autoUpdater.on('update-downloaded', (info) => {
+    sendUpdate({ type: 'downloaded', info })
+    autoUpdater.quitAndInstall()
+  })
 
   // 渲染层控制更新流程
   ipcMain.handle('updater:check', async () => {
@@ -105,6 +127,17 @@ app.whenReady().then(() => {
   ipcMain.handle('updater:quitAndInstall', () => {
     try {
       autoUpdater.quitAndInstall()
+      return { success: true }
+    } catch (e) {
+      return { success: false, error: String(e) }
+    }
+  })
+
+  // 重启客户端
+  ipcMain.handle('app:relaunch', () => {
+    try {
+      app.relaunch()
+      app.exit(0)
       return { success: true }
     } catch (e) {
       return { success: false, error: String(e) }

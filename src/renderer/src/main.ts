@@ -1,8 +1,6 @@
 // Styles Imports
 import './assets/main.scss'
 import './assets/globals.css'
-import 'primeicons/primeicons.css'
-import Lara from '@primeuix/themes/aura'
 
 // Plugins Imports
 import { createApp } from 'vue'

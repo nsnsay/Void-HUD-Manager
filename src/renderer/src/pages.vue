@@ -2,7 +2,7 @@
     <SidebarProvider class="relative">
         <Sidebar side="left" collapsible="icon" variant="floating" class="border-r border-border "
             :style="{ top: 'var(--header-height)', height: 'calc(100vh - var(--header-height))' }">
-            <SidebarHeader class="w-full" />
+            <SidebarHeader class="w-full"></SidebarHeader>
             <SidebarContent class="w-full">
                 <SidebarMenu>
                     <SidebarMenuItem class="w-auto group-data-[state=expanded]:w-full" v-for="item in indicatorItems"

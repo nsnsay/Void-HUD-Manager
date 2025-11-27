@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
 import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Switch } from '@/components/ui/switch';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { ColorPicker } from '@/components/ui/color-picker';
@@ -24,7 +24,8 @@ const settings = ref({
   "tColor": "f52559",
   "borderRadius": "0",
   "currentMatchId": "current",
-  "shortcutKey": "Ctrl+Alt+I"
+  "shortcutKey": "Ctrl+Alt+I",
+  "acrylicEnabled": true
 })
 
 const default_settings = ref({
@@ -39,7 +40,8 @@ const default_settings = ref({
   "tColor": "f52559",
   "borderRadius": "0",
   "currentMatchId": "current",
-  "shortcutKey": "Ctrl+Alt+I"
+  "shortcutKey": "Ctrl+Alt+I",
+  "acrylicEnabled": true
 })
 
 const modifierOptions = [
@@ -78,6 +80,9 @@ watch([selectedModifiers, selectedKey], ([m, k]) => {
 watch(() => settings.value.shortcutKey, (val) => {
   parseShortcut(val)
 })
+watch(() => settings.value.acrylicEnabled, () => {
+  promptRestart()
+})
 
 const saveSettings = async () => {
   try {
@@ -86,6 +91,25 @@ const saveSettings = async () => {
   } catch (error: any) {
     toast.error(t('common.saveFailed'), { description: error?.message ?? t('common.saveFailed'), duration: 3500 })
   }
+}
+
+function promptRestart() {
+  toast.info(t('common.restartRequired'), {
+    duration: 6000,
+    action: {
+      label: t('common.relaunchNow'),
+      onClick: async () => {
+        try {
+          await window.electron.ipcRenderer.invoke('app:relaunch')
+        } catch (err: any) {
+          toast.error(t('common.saveFailed'), { description: String(err?.message ?? err) })
+        }
+      }
+    },
+    cancel: {
+      label: t('common.notNow')
+    }
+  })
 }
 
 const resetSettings = async () => {
@@ -132,6 +156,20 @@ onMounted(async () => {
     </Transition>
     <Transition name="transform-in" mode="out-in" appear>
       <div class="settings-item">
+        <div class="setting-item-title">{{ t('settings.managerSettings.title') }}</div>
+        <div class="setting-item-container">
+          <div class="setting-item">
+            <div class="setting-item-label">
+              <div class="title">{{ t('settings.managerSettings.acrylic.label') }}</div>
+              <div class="description">{{ t('settings.managerSettings.acrylic.desc') }}</div>
+            </div>
+            <Switch id="acrylicEnabled" v-model="settings.acrylicEnabled" />
+          </div>
+        </div>
+      </div>
+    </Transition>
+    <Transition name="transform-in" mode="out-in" appear>
+      <div class="settings-item">
         <div class="setting-item-title">{{ t('settings.overlay.color') }}</div>
         <div class="setting-item-container">
           <div class="setting-item">
@@ -168,7 +206,7 @@ onMounted(async () => {
               <div class="title">{{ t('settings.overlay.focusedPlayer.label') }}</div>
               <div class="description">{{ t('settings.overlay.focusedPlayer.desc') }}</div>
             </div>
-            <Checkbox id="overlayFocusedPlayer" v-model="settings.overlayFocusedPlayer" class="w-5 h-5" />
+            <Switch id="overlayFocusedPlayer" v-model="settings.overlayFocusedPlayer" />
           </div>
           <div class="setting-item">
             <div class="setting-item-label">
@@ -191,14 +229,14 @@ onMounted(async () => {
               <div class="title">{{ t('settings.overlay.topbar.label') }}</div>
               <div class="description">{{ t('settings.overlay.topbar.desc') }}</div>
             </div>
-            <Checkbox id="overlayTopbar" v-model="settings.overlayTopbar" class="w-5 h-5" />
+            <Switch id="overlayTopbar" v-model="settings.overlayTopbar" />
           </div>
           <div class="setting-item">
             <div class="setting-item-label">
               <div class="title">{{ t('settings.overlay.radar.label') }}</div>
               <div class="description">{{ t('settings.overlay.radar.desc') }}</div>
             </div>
-            <Checkbox id="overlayRadar" v-model="settings.overlayRadar" class="w-5 h-5" />
+            <Switch id="overlayRadar" v-model="settings.overlayRadar" />
           </div>
           <div class="setting-item">
             <div class="setting-item-label">

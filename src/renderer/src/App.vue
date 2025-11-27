@@ -45,6 +45,7 @@ onMounted(() => {
           break
         case 'error':
           toast.error(t('updater.title'), { description: t('updater.error'), duration: 5000 })
+          console.error(payload)
           break
       }
     })

@@ -52,7 +52,8 @@
     flex-direction: row;
     width: 100%;
     height: var(--header-height);
-    background: var(--color-zinc-900);
+    background: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid var(--color-zinc-900);
     padding: 0.25rem;
     -webkit-app-region: drag;
     position: fixed;

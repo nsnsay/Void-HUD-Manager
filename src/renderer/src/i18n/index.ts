@@ -27,6 +27,7 @@ const messages = {
       recordNotFound: 'Record not found',
       upload: 'Upload',
       select: 'Select',
+      checkUpdate: 'Check Update',
       remove: 'Remove',
       readImageFailed: 'Failed to read image, please retry',
       unsupportedFormat: 'Only PNG/JPEG/WebP images are supported',
@@ -38,7 +39,10 @@ const messages = {
       validateFailed: 'Validation failed',
       modifySuccess: 'Updated successfully',
       addSuccess: 'Added successfully',
-      saveFailed: 'Save failed'
+      saveFailed: 'Save failed',
+      restartRequired: 'Settings changed, please restart the client to take effect.',
+      relaunchNow: 'Relaunch Now',
+      notNow: 'Not Now'
     },
     teams: {
       name: 'Team Name',
@@ -207,6 +211,18 @@ const messages = {
       toast: {
         saved: 'Settings saved'
       }
+      ,
+      managerSettings: {
+        title: 'Manager Settings',
+        acrylic: {
+          label: 'Acrylic Blur',
+          desc: 'Enable Windows acrylic blur background'
+        },
+        acrylicShortcut: {
+          label: 'Acrylic Shortcut',
+          desc: 'Global shortcut to toggle acrylic blur (Restart required)'
+        }
+      }
     },
     updater: {
       title: 'Update',
@@ -214,7 +230,7 @@ const messages = {
       available: 'Update available: {version}',
       notAvailable: 'You are up to date',
       downloading: 'Downloading update… {percent}%',
-      downloaded: 'Update downloaded. It will install on restart.',
+      downloaded: 'Update downloaded. Restarting to install…',
       error: 'Update error'
     }
   },
@@ -244,6 +260,7 @@ const messages = {
       recordNotFound: '记录不存在',
       upload: '上传',
       select: '选择',
+      checkUpdate: '检查更新',
       remove: '移除',
       readImageFailed: '读取图片失败，请重试',
       unsupportedFormat: '仅支持 PNG/JPEG/WebP 格式的图片',
@@ -255,7 +272,10 @@ const messages = {
       validateFailed: '校验失败',
       modifySuccess: '修改成功',
       addSuccess: '添加成功',
-      saveFailed: '保存失败'
+      saveFailed: '保存失败',
+      restartRequired: '设置已更改，但是需要重启客户端后生效。',
+      relaunchNow: '立即重启',
+      notNow: '暂不'
     },
     teams: {
       name: '队伍名称',
@@ -425,6 +445,18 @@ const messages = {
       toast: {
         saved: '设置已保存'
       }
+      ,
+      managerSettings: {
+        title: '管理器设置',
+        acrylic: {
+          label: '毛玻璃特效',
+          desc: '开启 Windows 毛玻璃（Acrylic）背景'
+        },
+        acrylicShortcut: {
+          label: '毛玻璃快捷键',
+          desc: '用于切换毛玻璃的全局快捷键（重启后生效）'
+        }
+      }
     },
     updater: {
       title: '更新',
@@ -432,7 +464,7 @@ const messages = {
       available: '发现新版本：{version}',
       notAvailable: '当前已是最新版本',
       downloading: '正在下载更新… {percent}%',
-      downloaded: '更新已下载，将在重启后安装',
+      downloaded: '更新已下载，正在自动安装并重启',
       error: '更新检查出错'
     }
   }

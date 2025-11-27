@@ -133,8 +133,8 @@
     gap: 1rem;
     width: 100%;
     height: 100%;
-    background: var(--background-glass);
-    backdrop-filter: blur(10px);
+    background: var(--background-alpha);
+    backdrop-filter: blur(15px);
 
     .form-title {
         font-size: 1.2rem;

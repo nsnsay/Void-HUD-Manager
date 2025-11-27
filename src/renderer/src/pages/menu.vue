@@ -39,6 +39,15 @@
           https://github.com/advancedfx/advancedfx/wiki/Source2%3Amirv_colors" target="_blank">HLAE
           Wiki</a>
       </div>
+
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-title">{{ t('updater.title') }}</div>
+      <div class="menu-item-content">
+        <Button variant="secondary" style="margin-top: 0.5rem;" @click="checkUpdate">
+          {{ t('common.checkUpdate') }}
+        </Button>
+      </div>
     </div>
   </div>
 </template>
@@ -136,6 +145,17 @@ async function autoPlaceGSI() {
     }
   } catch (err: any) {
     toast.error('Error', { description: String(err?.message ?? err) })
+  }
+}
+
+async function checkUpdate() {
+  try {
+    const res = await window.update.check()
+    if (!res?.success) {
+      toast.error(t('updater.title'), { description: res?.error ?? 'Unknown error' })
+    }
+  } catch (err: any) {
+    toast.error(t('updater.title'), { description: String(err?.message ?? err) })
   }
 }
 

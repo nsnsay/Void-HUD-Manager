@@ -76,8 +76,8 @@
     justify-content: center;
     flex-direction: column;
     gap: 1rem;
-    background: var(--background-glass);
-    backdrop-filter: blur(10px);
+    background: var(--background-alpha);
+    backdrop-filter: blur(15px);
 }
 
 .team-card-container {

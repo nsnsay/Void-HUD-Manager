@@ -265,7 +265,8 @@ export class DatabaseService {
     "tColor": "f52559",
     "borderRadius": "0px",
     "currentMatchId": "current",
-    "shortcutKey": "Ctrl+Alt+I"
+    "shortcutKey": "Ctrl+Alt+I",
+    "acrylicEnabled": true
   })
   readonly additional = new KeyValueStore<KeyValueData>(additionalFile, {})
 }
