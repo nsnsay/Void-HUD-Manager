@@ -5,7 +5,7 @@
         <h1 class="text-2xl sm:text-3xl font-semibold tracking-tight">{{ t('multi.matchForm.title') }}</h1>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="space-y-2">
           <div class="text-sm font-medium text-muted-foreground">
             {{ selectedTeamA?.name ?? t('multi.matchForm.teamA') }}
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3">
         <div class="space-y-2">
           <div class="text-sm font-medium text-muted-foreground">{{ t('multi.matchForm.type') }}</div>
           <Select v-model="matchForm.type">
@@ -58,7 +58,7 @@
       <Separator />
 
       <div class="space-y-4">
-        <div class="max-h-[420px] overflow-y-auto">
+        <div class="overflow-y-auto">
           <TransitionGroup tag="div" class="space-y-4" enter-active-class="transition duration-200"
             enter-from-class="opacity-0 -translate-y-1" enter-to-class="opacity-100 translate-y-0"
             leave-active-class="transition duration-150" leave-from-class="opacity-100 translate-y-0"
@@ -461,3 +461,15 @@ onMounted(async () => {
   await autoLoadMatch()
 })
 </script>
+
+<style scoped>
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+</style>

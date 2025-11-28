@@ -215,7 +215,7 @@ const messages = {
       managerSettings: {
         title: 'Manager Settings',
         acrylic: {
-          label: 'Acrylic Blur',
+          label: 'Acrylic Blur(Not available)',
           desc: 'Enable Windows acrylic blur background'
         },
         acrylicShortcut: {
@@ -449,7 +449,7 @@ const messages = {
       managerSettings: {
         title: '管理器设置',
         acrylic: {
-          label: '毛玻璃特效',
+          label: '毛玻璃特效（不可用）',
           desc: '开启 Windows 毛玻璃（Acrylic）背景'
         },
         acrylicShortcut: {

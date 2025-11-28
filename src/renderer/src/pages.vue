@@ -22,7 +22,7 @@
 
         <SidebarInset class="pt-(--header-height) h-full w-full">
             <router-view v-slot="{ Component }">
-                <transition name="fade" mode="out-in">
+                <transition name="fade" mode="out-in" appear>
                     <keep-alive>
                         <div :key="$route.path" class="h-full w-full">
                             <component :is="Component" />

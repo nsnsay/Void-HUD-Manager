@@ -3,7 +3,7 @@
     <div @click="isOpen = !isOpen">
       <slot />
     </div>
-    <Transition name="fade" mode="out-in">
+    <Transition name="fade">
       <div v-if="isOpen"
         class="absolute top-full transform -translate-x-1/2 mt-2 w-80 p-4 bg-popover border rounded-md shadow-md z-50 "
         style="left: -350%;">

@@ -133,7 +133,7 @@ onMounted(async () => {
 
 <template>
   <div class="settings-container">
-    <Transition name="transform-in" mode="out-in" appear>
+    <Transition name="transform-in" appear>
       <div class="settings-item">
         <div class="setting-item-title">{{ t('settings.manager.title') }}</div>
         <div class="setting-item-container">
@@ -154,7 +154,7 @@ onMounted(async () => {
         </div>
       </div>
     </Transition>
-    <Transition name="transform-in" mode="out-in" appear>
+    <Transition name="transform-in" appear>
       <div class="settings-item">
         <div class="setting-item-title">{{ t('settings.managerSettings.title') }}</div>
         <div class="setting-item-container">
@@ -163,12 +163,12 @@ onMounted(async () => {
               <div class="title">{{ t('settings.managerSettings.acrylic.label') }}</div>
               <div class="description">{{ t('settings.managerSettings.acrylic.desc') }}</div>
             </div>
-            <Switch id="acrylicEnabled" v-model="settings.acrylicEnabled" />
+            <Switch id="acrylicEnabled" disabled v-model="settings.acrylicEnabled" />
           </div>
         </div>
       </div>
     </Transition>
-    <Transition name="transform-in" mode="out-in" appear>
+    <Transition name="transform-in" appear>
       <div class="settings-item">
         <div class="setting-item-title">{{ t('settings.overlay.color') }}</div>
         <div class="setting-item-container">
@@ -197,7 +197,7 @@ onMounted(async () => {
         </div>
       </div>
     </Transition>
-    <Transition name="transform-in" mode="out-in" appear>
+    <Transition name="transform-in" appear>
       <div class="settings-item">
         <div class="setting-item-title">{{ t('settings.overlay.title') }}</div>
         <div class="setting-item-container">

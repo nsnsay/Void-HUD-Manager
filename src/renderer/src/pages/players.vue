@@ -1,6 +1,6 @@
 <template>
     <div class="players-card-container">
-        <TransitionGroup name="transform-in" mode="out-in" appear>
+        <TransitionGroup name="transform-in" appear>
             <div v-for="player in Players" :key="player.id">
                 <DropdownMenu :open="openedContextPlayerId === player.id"
                     @update:open="val => { if (!val && openedContextPlayerId === player.id) openedContextPlayerId = null }">
@@ -20,7 +20,7 @@
                 </DropdownMenu>
             </div>
         </TransitionGroup>
-        <Transition name="transform-in" mode="out-in">
+        <Transition name="transform-in" appear>
             <div class="player-card-add" @click="openCreatePlayerForm">
                 <Plus class="size-6" />
             </div>
@@ -149,12 +149,12 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: row;
-    gap: 0.5rem;
+    gap: 1rem;
     width: 100%;
-    height: 100%;
     padding: 1rem;
     --player-card-width: 160px;
     --player-card-height: 180px;
+    flex-wrap: wrap;
 
     .player-card {
         display: flex;
@@ -166,6 +166,7 @@
         height: var(--player-card-height);
         border-radius: var(--radius);
         border: 1px solid var(--border);
+        background: var(--background-alpha);
         box-shadow: var(--shadow-2xs);
         padding: 0.5rem;
         position: relative;
@@ -179,7 +180,6 @@
             justify-content: center;
             flex-direction: row;
             gap: 0.3rem;
-            background: var(--background-weak);
             border-radius: var(--radius);
             opacity: 0.4;
 
@@ -206,6 +206,7 @@
 
         .player-avatar {
             height: 6.5rem;
+            width: 6.5rem;
             border-radius: 50%;
             border: 2px solid var(--color-primary);
 
@@ -237,7 +238,7 @@
         gap: 0.2rem;
         width: var(--player-card-width);
         height: var(--player-card-height);
-        background: var(--background-weak);
+        background: var(--background-alpha);
         border-radius: var(--radius);
         padding: 0.5rem;
         cursor: pointer;

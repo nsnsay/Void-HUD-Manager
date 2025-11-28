@@ -1,6 +1,6 @@
 <template>
     <div class="team-card-container">
-        <TransitionGroup name="transform-in" mode="out-in" appear>
+        <TransitionGroup name="transform-in" appear>
             <div v-for="team in teams" :key="team.id">
                 <DropdownMenu :open="openedContextTeamId === team.id"
                     @update:open="val => { if (!val && openedContextTeamId === team.id) openedContextTeamId = null }">
@@ -20,7 +20,7 @@
                 </DropdownMenu>
             </div>
         </TransitionGroup>
-        <Transition name="transform-in" mode="out-in">
+        <Transition name="transform-in" mode="out-in" appear>
             <div class="team-card-add" @click="openCreateTeamForm">
                 <Plus class="size-6" />
             </div>
@@ -84,10 +84,9 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    height: 100%;
     width: 100%;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 1rem;
     padding: 1rem;
 
     --team-card-width: 160px;
@@ -108,6 +107,7 @@
         position: relative;
         border: 1px solid var(--border);
         box-shadow: var(--shadow-2xs);
+        background: var(--background-alpha);
 
         .team-avatar {
             height: 6.5rem;
@@ -176,7 +176,7 @@
         gap: 0.2rem;
         width: var(--team-card-width);
         height: var(--team-card-height);
-        background: var(--background-weak);
+        background: var(--background-alpha);
         border-radius: var(--radius);
         padding: 0.5rem;
         cursor: pointer;
